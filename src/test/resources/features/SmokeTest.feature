@@ -1,7 +1,7 @@
-Feature: Deindeal login Demo
+Feature: Deindeal Smoketest
 
-  @bleablea
-  Scenario: Deindeal login
+  @SnokeTest
+  Scenario: Deindeal Smoketest
     Given I am on the homepage
     When I click the login button
     When I enter a "random" collection
