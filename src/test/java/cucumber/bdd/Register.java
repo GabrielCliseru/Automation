@@ -7,7 +7,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
 
-public class Register extends SetupDriver {
+public class Register extends Utils {
 
 
 }

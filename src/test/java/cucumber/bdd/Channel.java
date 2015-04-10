@@ -11,7 +11,7 @@ package cucumber.bdd;
         import java.util.List;
         import java.util.Random;
 
-public class Channel extends SetupDriver {
+public class Channel extends Utils {
 
     @When("^I enter a \"([^\"]*)\" collection$")
     public int I_enter_a_collection(String arg1)
