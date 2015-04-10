@@ -16,4 +16,9 @@ public class Homepage extends SetupDriver {
     }
 
 
+    @Given("^I am on the \"([^\"]*)\" page for the first time$")
+    public void I_am_on_the_page_for_the_first_time(String arg1) throws Throwable {
+        // Express the Regexp above with the code you wish you had
+        throw new PendingException();
+    }
 }
