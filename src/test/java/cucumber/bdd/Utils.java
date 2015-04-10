@@ -11,22 +11,9 @@ import java.util.Date;
 import java.util.Random;
 import java.util.List;
 
-/**
- * Created by Setek on 11/30/2014.
- */
 public class Utils extends SetupDriver {
 
-    public int I_enter_a_collection() {
-        List<WebElement> collectionNames = driver.findElements(By.cssSelector("data-tracking-type='collection'"));
-        Random rand = new Random();
-        int i = rand.nextInt(collectionNames.size());
-        //pe asta l-am pus aici ca sa nu mai facem mereu operatiunea de cautare in obiectul sau, deja il folosim de 2 ori
-        //mai jos
-        WebElement currentElement = collectionNames.get(i);
-        String collectionID = currentElement.getAttribute("data-tracking-id");
-        currentElement.click();
-        return Integer.parseInt(collectionID);
-    }
+
 
     public void I_navigate_to_channel(String channelName) {
         List<WebElement> channelNames = driver.findElements(By.cssSelector("ul.channels>li>a"));
@@ -67,17 +54,7 @@ public class Utils extends SetupDriver {
         driver.findElement(By.linkText(section)).click();
     }
 
-    public void loginMoosehead() {
-        driver.navigate().to("http://www.deindeal.ch/admins/sign_in");
-        WebElement adminEmailInput = driver.findElement(By.id("admin_email"));
-        adminEmailInput.sendKeys("cosmin.uta@deindeal.ch");
 
-        WebElement adminPasswordInput = driver.findElement(By.id("admin_password"));
-        adminPasswordInput.sendKeys("CUcu1989");
-
-        WebElement adminButtonInput = driver.findElement(By.className("blue"));
-        adminButtonInput.click();
-    }
 
     public static void mouseActions(WebElement element, String link) throws InterruptedException {
         Actions act = new Actions(driver);
