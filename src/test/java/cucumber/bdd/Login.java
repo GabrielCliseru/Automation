@@ -8,7 +8,7 @@ import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class Login extends SetupDriver {
+public class Login extends Utils {
 
     @When("^I click the login button$")
     public void i_click_the_Sign_In_button() {
