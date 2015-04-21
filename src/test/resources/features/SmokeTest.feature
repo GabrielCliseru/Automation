@@ -1,10 +1,8 @@
 Feature: Deindeal Smoketest
+Background: I login into Moosehead
 
   @SnokeTest
   Scenario: Deindeal Smoketest
-    Given I am on the homepage
-    When I click the login button
-    When I enter a "random" collection
     And Sign in to the newsletter with a new email address from the new user popup
     And Register user with a new email address
     And Add a product to the cart
