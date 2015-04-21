@@ -6,8 +6,10 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 public class Register extends Utils {
-
-
+    @When("^FunctionToSeeTheClass$")
+    public void FunctionToSeeTheClass(){
+    }
 }

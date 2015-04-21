@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Utils extends SetupDriver {
 
-
+    String cityName,cityNameID;
 
     public void I_navigate_to_channel(String channelName) {
         List<WebElement> channelNames = driver.findElements(By.cssSelector("ul.channels>li>a"));
