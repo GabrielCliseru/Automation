@@ -30,4 +30,17 @@ public class Homepage extends Utils {
         WebDriverWait wait = new WebDriverWait(driver, 3);
         wait.until(ExpectedConditions.elementToBeClickable(By.id("subscriptionLpPopup")));
     }
+
+    @And("^I save the city$")
+    public void I_save_the_city(){
+        // Express the Regexp above with the code you wish you had
+        cityName = driver.findElement(By.cssSelector("#subscription_stadt>div>span")).getText();
+        cityNameID = driver.findElement(By.cssSelector("#subscription_stadt>div>span")).getAttribute("data-id");
+    }
+
+    @And("^I have the right city ticked in \"([^\"]*)\"$")
+    public void I_have_the_right_city_ticked_in(String arg1) throws Throwable {
+        //TODO: Implement the check
+        throw new PendingException();
+    }
 }

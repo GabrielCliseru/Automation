@@ -3,7 +3,7 @@ Background: I login into Moosehead
 
   @SnokeTest
   Scenario: Deindeal Smoketest
-    And Sign in to the newsletter with a new email address from the new user popup
+    Given I Sign in to the newsletter with a new email address from the new user popup
     And Register user with a new email address
     And Add a product to the cart
     And Add a coupon to the cart
