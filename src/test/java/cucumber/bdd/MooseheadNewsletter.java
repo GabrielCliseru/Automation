@@ -1,6 +1,6 @@
 package cucumber.bdd;
 
-
+import org.openqa.selenium.support.PageFactory;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
@@ -23,7 +23,7 @@ public class MooseheadNewsletter extends Utils {
     public void I_look_for(String emailAddress){
         WebElement searchInput = driver.findElement(By.id("search"));
         searchInput.sendKeys("cosmin.uta@deindeal.ch");
-        WebElement searchButton = driver.findElement(By.cssSelector("[type=\"submit\"]"));
+        WebElement searchButton = driver.findElement(By.cssSelector("[type='submit']"));
         searchButton.click();
     }
 
@@ -40,7 +40,7 @@ public class MooseheadNewsletter extends Utils {
         List<WebElement> subscriptionStatusList = driver.findElements(By.cssSelector("option:checked"));
         Boolean newsletterSubscritionTest=false;
         int validationsCounter=0,i=0;
-        List<WebElement> channelName = driver.findElements(By.cssSelector("label[for^=\"channel\"]"));
+        List<WebElement> channelName = driver.findElements(By.cssSelector("label[for^='channel']"));
         WebElement channelNameArray[] = channelName.toArray(new WebElement[channelName.size()]);
         for(WebElement option:subscriptionStatusList){
             if(option.getText().equals("subscribe")){
@@ -58,6 +58,4 @@ public class MooseheadNewsletter extends Utils {
         }
         Assert.assertTrue("Subscribed to too many newsletters", newsletterSubscritionTest);
     }
-
-
 }

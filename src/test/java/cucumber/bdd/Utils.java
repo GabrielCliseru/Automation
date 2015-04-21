@@ -1,9 +1,13 @@
 package cucumber.bdd;
 
+import cucumber.api.PendingException;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.When;
 import junit.framework.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.PageFactory;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -12,8 +16,13 @@ import java.util.Random;
 import java.util.List;
 
 public class Utils extends SetupDriver {
+    Login StagingLogin = PageFactory.initElements(driver, Login.class);
+    Homepage Homepage = PageFactory.initElements(driver, Homepage.class);
+    MooseheadLogin MooseheadLogin = PageFactory.initElements(driver, MooseheadLogin.class);
+    MooseheadNewsletter MooseheadNewsletter = PageFactory.initElements(driver, MooseheadNewsletter.class);
+    Newsletter Newsletter = PageFactory.initElements(driver, Newsletter.class);
 
-    String cityName,cityNameID;
+    String cityName,cityNameID,newEmailAddress,newPassword;
 
     public void I_navigate_to_channel(String channelName) {
         List<WebElement> channelNames = driver.findElements(By.cssSelector("ul.channels>li>a"));
@@ -46,8 +55,7 @@ public class Utils extends SetupDriver {
         Date date = new Date();
         s2 = dateFormat.format(date);
         s3 = "@deindeal.ch";
-        String composedEmailAddress = s1 + s2 + s3;
-        return composedEmailAddress;
+        return s1+s2+s3;
     }
 
     public void openSection(String section) {
@@ -73,5 +81,22 @@ public class Utils extends SetupDriver {
             Thread.sleep(250);
         }
         driver.findElement(By.linkText(link2)).click();
+    }
+
+
+    @Given("^I login into staging \"([^\"]*)\"$")
+    public void I_login_into_staging(String stagingNumber){
+        String stg;
+        if(stagingNumber.equalsIgnoreCase("1")){
+            stg = "moosehead-edge.com";
+        }if(stagingNumber.equalsIgnoreCase("2")){
+            stg = "moosedev.net";
+        }if(stagingNumber.equalsIgnoreCase("3")){
+            stg = "moosedev3.net";
+        }if(stagingNumber.equalsIgnoreCase("4")){
+            stg = "moosedev4.net";
+        }if(stagingNumber.equalsIgnoreCase("5")){
+            stg = "moosedev5.net";
+        }
     }
 }

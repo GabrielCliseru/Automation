@@ -6,5 +6,5 @@ Feature: Deindeal Smoketest
     When I enter a new email in the newsletter
     And I save the selected city
     And I push on register
-    Then the newsletter dissappear
+    Then the newsletter disappear
     And I have the right city ticked in myAccount/Newsletter
