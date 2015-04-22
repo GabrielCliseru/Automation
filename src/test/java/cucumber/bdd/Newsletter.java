@@ -59,6 +59,5 @@ public class Newsletter extends Utils {
         Newsletter.I_push_on_register();
         Newsletter.the_newsletter_disappear();
         Newsletter.I_save_the_selected_city();
-        Newsletter.I_have_the_right_city_ticked_in_myAccount_Newsletter();
     }
 }
