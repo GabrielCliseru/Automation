@@ -6,7 +6,7 @@ Feature: Various steps for helpers
 
 
   Scenario: Add a product to the cart
-    Given I am logged in
+    Given I login into staging "1"
     Given I am on a product collection page
     When I press to "Add to cart" button - div[id^="addToCart"]
     Then I should see the cart
