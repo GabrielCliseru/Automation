@@ -2,14 +2,15 @@ package cucumber.bdd;
 
 import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
+import org.junit.Assert;
 
 /**
  * Created by IEUser on 4/24/2015.
  */
-public class Header {
-    @And("^Add a product to the cart$")
-    public void Add_a_product_to_the_cart() throws Throwable {
-        // Express the Regexp above with the code you wish you had
-        throw new PendingException();
+public class Header extends Utils{
+    @And("^language is set to \"([^\"]*)\"$")
+    public void language_is_set_to(String language){
+        String[] pageURL = splitURLToSections(driver.getCurrentUrl());
+        Assert.assertTrue(isLanguage(pageURL,language));
     }
 }

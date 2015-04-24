@@ -9,8 +9,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 
+import javax.enterprise.inject.New;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 import java.util.List;
@@ -83,6 +85,16 @@ public class Utils extends SetupDriver {
         driver.findElement(By.linkText(link2)).click();
     }
 
+    public String[] splitURLToSections(String URL){
+        String[] listOfURLSections;
+        listOfURLSections = URL.split("/");
+        return listOfURLSections;
+    }
+
+    public boolean isLanguage(String[] sections, String expectedLanguage){
+        //todo: actually debug this crap
+        return sections[2].equalsIgnoreCase(expectedLanguage);
+    }
 
     @Given("^I navigate to staging \"([^\"]*)\"$")
     public String I_navigate_to_staging(String stagingNumber){
