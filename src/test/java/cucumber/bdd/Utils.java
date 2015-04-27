@@ -91,9 +91,17 @@ public class Utils extends SetupDriver {
         return listOfURLSections;
     }
 
+    public String arrayToString(String[] incomingArray){
+        StringBuffer result = new StringBuffer();
+        for (int i = 0; i < incomingArray.length; i++) {
+            result.append( incomingArray[i] );
+        }
+        return result.toString();
+    }
+
     public boolean isLanguage(String[] sections, String expectedLanguage){
         //todo: actually debug this crap
-        return sections[2].equalsIgnoreCase(expectedLanguage);
+        return sections[3].equalsIgnoreCase(expectedLanguage);
     }
 
     @Given("^I navigate to staging \"([^\"]*)\"$")

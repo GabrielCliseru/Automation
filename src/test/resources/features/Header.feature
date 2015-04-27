@@ -3,7 +3,7 @@ Feature: Header
   Scenario Outline: Header discount information link validation
     Given I am on the homepage
     And language is set to "<language>"
-    When I click the "<discount>" link
+    When I click the header "<discount>" link
     Then I should land on "<discountlink>"
   Examples:
     | language | discount             | discountlink                                                       |
@@ -19,7 +19,7 @@ Feature: Header
   Scenario Outline: Header refund information link validation
     Given I am on the homepage
     And language is set to "<language>"
-    When I click the "<refund>" link
+    When I click the header "<refund>" link
     Then I should land on "<refundlink>"
   Examples:
     | language | refund                     | refundlink                                                         |
