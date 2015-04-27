@@ -1,8 +1,6 @@
 Feature: Header
 Background: I should not see the "new page" popup
 
-  #sa ma plimb la toate canalele
-  @NavigateToAllChannels
   Scenario Outline: Header discount information link validation
     Given I am on the homepage
     And language is set to "<language>"
@@ -10,8 +8,8 @@ Background: I should not see the "new page" popup
     Then I should land on "<discountlink>"
   Examples:
     | language | discount             | discountlink                                                       |
-    | DE       | BIS ZU 70% RABATT *  | http://www.deindeal.ch/de/wie-funktioniert-deindeal#anchor-lower   |
-    | FR       | DE REMISE MAXIMALE * | http://www.deindeal.ch/fr/comment-fonctionne-deindeal#anchor-lower |
+    | DE       | BIS ZU 70% RABATT *  | /de/wie-funktioniert-deindeal#anchor-lower   |
+    | FR       | DE REMISE MAXIMALE * | /fr/comment-fonctionne-deindeal#anchor-lower |
 
 #  Scenario: Header validation
 #  Given I am on the homepage
@@ -19,7 +17,6 @@ Background: I should not see the "new page" popup
 #  When I click the "BIS ZU 70% RABATT *" link
 #  Then I should land on "http://www.deindeal.ch/de/wie-funktioniert-deindeal#anchor-lower"
 
-  @NavigateToAllChannels
   Scenario Outline: Header refund information link validation
     Given I am on the homepage
     And language is set to "<language>"
@@ -27,5 +24,60 @@ Background: I should not see the "new page" popup
     Then I should land on "<refundlink>"
   Examples:
     | language | refund                     | refundlink                                                         |
-    | DE       | 14 TAGE RÜCKGABERECHT      | http://www.deindeal.ch/de/wie-funktioniert-deindeal#anchor-lower   |
-    | FR       | DROIT DE RETOUR : 14 JOURS | http://www.deindeal.ch/fr/comment-fonctionne-deindeal#anchor-lower |
+    | DE       | 14 TAGE RÜCKGABERECHT      | /de/wie-funktioniert-deindeal#anchor-lower   |
+    | FR       | DROIT DE RETOUR : 14 JOURS | /fr/comment-fonctionne-deindeal#anchor-lower |
+
+  Scenario Outline: Header customer care phone number link validation
+    Given I am on the homepage
+    And language is set to "<language>"
+    Then I should see "<customer_care_number>"
+    And "<customer_care_number>" should not be a link
+  Examples:
+    | language | customer_care_number      |
+    | DE       | LOKALTARIF 0848 500 501   |
+    | FR       | TARIF LOCALE 0848 500 501 |
+
+  Scenario Outline: Header Kontakt form link validation
+    Given I am on the homepage
+    And language is set to "<language>"
+    When I click the "<Kontakt>" link
+    Then I should land on "<Kontakt_form>"
+  Examples:
+    | language | Kontakt     | Kontakt_form                               |
+    | DE       | SCHREIB UNS | /de/wie-funktioniert-deindeal#anchor-lower |
+    | FR       | ECRIS-NOUS  | /fr/contacter                              |
+
+
+  @NavigateToAllChannels
+  Scenario Outline: Header language select validation
+    # Selecting the channel page is done from the header
+    Given I am on the "<channel_page>" 
+    When I select "<language>"
+    Then I should see "<language>" selected
+    # The URL in the browser should be the corresponding one for each language
+    And channel url is set to "<language>"
+  Examples:
+    | language |
+    | DE       |
+    | FR       |
+
+  @NavigateToAllChannels
+  Scenario Outline: Header DeinDeal logo redirect validation
+    Given I am on the "<channel_page>"
+    And language is set to "<language>"
+    When I click the DeinDeal logo
+    Then I should land on homepage
+  Examples:
+    | language |
+    | DE       |
+    | FR       |
+
+  Scenario Outline: Header DeinDeal logo redirect from checkout validation
+    Given I am on the checkout page
+    And language is set to "<language>"
+    When I click the DeinDeal logo
+    Then I should land on homepage
+  Examples:
+    | language |
+    | DE       |
+    | FR       |
