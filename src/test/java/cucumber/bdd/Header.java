@@ -1,6 +1,7 @@
 package cucumber.bdd;
 
 import cucumber.api.PendingException;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -15,6 +16,9 @@ import java.util.List;
  * Created by IEUser on 4/24/2015.
  */
 public class Header extends Utils{
+    @Before("@NavigateToAllChannels")
+
+
     @And("^language is set to \"([^\"]*)\"$")
     public void language_is_set_to(String language){
         String[] pageURL = splitURLToSections(driver.getCurrentUrl());

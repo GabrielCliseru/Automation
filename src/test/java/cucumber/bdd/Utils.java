@@ -18,13 +18,17 @@ import java.util.Random;
 import java.util.List;
 
 public class Utils extends SetupDriver {
-    Login StagingLogin = PageFactory.initElements(driver, Login.class);
-    Homepage Homepage = PageFactory.initElements(driver, Homepage.class);
-    MooseheadLogin MooseheadLogin = PageFactory.initElements(driver, MooseheadLogin.class);
-    MooseheadNewsletter MooseheadNewsletter = PageFactory.initElements(driver, MooseheadNewsletter.class);
-    Newsletter Newsletter = PageFactory.initElements(driver, Newsletter.class);
+//    Login StagingLogin = PageFactory.initElements(driver, Login.class);
+//    Homepage Homepage = PageFactory.initElements(driver, Homepage.class);
+//    MooseheadLogin MooseheadLogin = PageFactory.initElements(driver, MooseheadLogin.class);
+//    MooseheadNewsletter MooseheadNewsletter = PageFactory.initElements(driver, MooseheadNewsletter.class);
+//    Newsletter Newsletter = PageFactory.initElements(driver, Newsletter.class);
 
     String cityName,cityNameID,newEmailAddress,newPassword;
+
+    public void NavigateToAllChannels(){
+
+    }
 
     public void I_navigate_to_channel(String channelName) {
         List<WebElement> channelNames = driver.findElements(By.cssSelector("ul.channels>li>a"));
@@ -102,31 +106,5 @@ public class Utils extends SetupDriver {
     public boolean isLanguage(String[] sections, String expectedLanguage){
         //todo: actually debug this crap
         return sections[3].equalsIgnoreCase(expectedLanguage);
-    }
-
-    @Given("^I navigate to staging \"([^\"]*)\"$")
-    public String I_navigate_to_staging(String stagingNumber){
-        String stg="";
-        if(stagingNumber.equalsIgnoreCase("1")){
-            stg = "moosehead-edge.com";
-        }if(stagingNumber.equalsIgnoreCase("2")){
-            stg = "moosedev.net";
-        }if(stagingNumber.equalsIgnoreCase("3")){
-            stg = "moosedev3.net";
-        }if(stagingNumber.equalsIgnoreCase("4")){
-            stg = "moosedev4.net";
-        }if(stagingNumber.equalsIgnoreCase("5")){
-            stg = "moosedev5.net";
-        }
-        driver.navigate().to("www://"+stg);
-        return stg;
-    }
-
-    @Given("^I login into staging \"([^\"]*)\"$")
-    public void I_login_into_staging(String stagingNumber){
-        driver.navigate().to("www://"+I_navigate_to_staging(stagingNumber));
-        driver.findElement(By.id("admin_email")).sendKeys("gabriel.cliseru@deindeal.ch");
-        driver.findElement(By.id("admin_password")).sendKeys("qweASD123");
-        driver.findElement(By.id("admin_remember_me")).click();
     }
 }

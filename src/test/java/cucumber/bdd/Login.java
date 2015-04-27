@@ -13,10 +13,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class Login extends Utils {
-    @When("^FunctionToSeeTheClass$")
-    public void FunctionToSeeTheClass(){
-    }
-
     @When("^I click the Sign In button$")
     public void I_click_the_Sign_In_button(){
         WebElement LoginRegisterButton = driver.findElement(By.className("lnk-login"));
@@ -50,6 +46,10 @@ public class Login extends Utils {
                 }
             }
             Assert.assertFalse("newsletter container visible", driver.findElement(By.id("popupPlaceholder")).isDisplayed());
+        }if(pageType.equalsIgnoreCase("new page")){
+            if (driver.findElement(By.cssSelector("#popupPlaceholder_wrapper")).isDisplayed()){
+                driver.findElement(By.cssSelector("#subscriptionLpPopup .actions a")).click();
+            }
         }
     }
 }

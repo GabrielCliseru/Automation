@@ -1,5 +1,8 @@
 Feature: Header
+Background: I should not see the "new page" popup
 
+  #sa ma plimb la toate canalele
+  @NavigateToAllChannels
   Scenario Outline: Header discount information link validation
     Given I am on the homepage
     And language is set to "<language>"
@@ -16,6 +19,7 @@ Feature: Header
 #  When I click the "BIS ZU 70% RABATT *" link
 #  Then I should land on "http://www.deindeal.ch/de/wie-funktioniert-deindeal#anchor-lower"
 
+  @NavigateToAllChannels
   Scenario Outline: Header refund information link validation
     Given I am on the homepage
     And language is set to "<language>"

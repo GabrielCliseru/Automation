@@ -12,6 +12,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 public class Newsletter extends Utils {
+    Homepage Homepage = PageFactory.initElements(driver, Homepage.class);
+    Newsletter Newsletter = PageFactory.initElements(driver, Newsletter.class);
 
     @When("^I enter a new email in the newsletter$")
     public void I_enter_a_new_email_in_the_newsletter(){

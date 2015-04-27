@@ -7,11 +7,11 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Homepage extends Utils {
-
     @Given("^I am on the homepage$")
     public void i_am_on_the_homepage(){
         // Write code here that turns the phrase above into concrete actions
