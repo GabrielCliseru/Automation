@@ -3,6 +3,7 @@ package cucumber.bdd;
 import cucumber.api.PendingException;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
@@ -43,5 +44,25 @@ public class Header extends Utils{
         for(WebElement link : links){
                 Assert.assertTrue("The links is not found",link.getText().equalsIgnoreCase(linkName));
         }
+    }
+
+
+    @Then("^I should see \"([^\"]*)\"$")
+    public WebElement I_should_see(String contactNumber) throws Throwable {
+        List<WebElement> headerLinks = driver.findElements(By.cssSelector("#trustedElements>li"));
+        WebElement link = headerLinks.get(2);
+        if (!contactNumber.equalsIgnoreCase("qwe")){
+            Assert.assertTrue("The contact number is wrong",link.getText().equals(contactNumber));
+        }
+        return link;
+    }
+
+    @And("^\"([^\"]*)\" should not be a link$")
+    public void should_not_be_a_link(String arg1) throws Throwable {
+        String prevLink = driver.getCurrentUrl();
+        WebElement contactNumberLink = I_should_see("qwe");
+        contactNumberLink.click();
+        String afterLink = driver.getCurrentUrl();
+        Assert.assertTrue("the contact number is a link",prevLink.equals(afterLink));
     }
 }
