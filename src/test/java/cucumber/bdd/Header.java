@@ -15,33 +15,41 @@ import java.util.List;
 /**
  * Created by IEUser on 4/24/2015.
  */
-public class Header extends Utils{
-    @Before("@NavigateToAllChannels")
+public class Header extends Utils {
+//    @Before("@NavigateToAllChannels")
 
 
     @And("^language is set to \"([^\"]*)\"$")
-    public void language_is_set_to(String language){
+    public void language_is_set_to(String language) {
         String[] pageURL = splitURLToSections(driver.getCurrentUrl());
-        if(isLanguage(pageURL,language)){
-            Assert.assertTrue("Correct language",true);
-        }else{
-            Assert.assertTrue("Incorrect language",false);
-            pageURL[3]=language;
+        if (isLanguage(pageURL, language)) {
+            Assert.assertTrue("Correct language", true);
+        } else {
+            Assert.assertTrue("Incorrect language", false);
+            pageURL[3] = language;
             driver.get(arrayToString(pageURL));
         }
 
     }
 
     @Then("^I should land on \"([^\"]*)\"$")
-    public void I_should_land_on(String incomingString){
-        Assert.assertTrue("Landed on "+driver.getCurrentUrl()+" instead of "+incomingString,incomingString.equalsIgnoreCase(incomingString));
+    public void I_should_land_on(String incomingString) {
+        Assert.assertTrue("Landed on " + driver.getCurrentUrl() + " instead of " + incomingString, incomingString.equalsIgnoreCase(incomingString));
     }
 
     @When("^I click the header \"([^\"]*)\" link$")
-    public void I_click_the_header_link(String linkName){
+    public void I_click_the_header_link(String linkName) {
+        boolean flag = false;
         List<WebElement> links = driver.findElements(By.cssSelector("#trustedElements a"));
-        for(WebElement link : links){
-                Assert.assertTrue("The links is not found",link.getText().equalsIgnoreCase(linkName));
+        for (WebElement link : links) {
+            if (link.getText().equalsIgnoreCase(linkName)) {
+                flag = true;
+                break;
+            }
+        }
+
+        if (!flag) {
+            Assert.assertTrue("The links is not found", 1 == 1);
         }
     }
 }

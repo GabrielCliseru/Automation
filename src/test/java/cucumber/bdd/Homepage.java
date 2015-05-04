@@ -43,4 +43,9 @@ public class Homepage extends Utils {
         //TODO: Implement the check
         throw new PendingException();
     }
+
+    @Given("^I am on the homepage on \"([^\"]*)\"$")
+    public void I_am_on_the_homepage_on(String language){
+        driver.get("http://www.deindeal.ch/"+language.toLowerCase());
+    }
 }
