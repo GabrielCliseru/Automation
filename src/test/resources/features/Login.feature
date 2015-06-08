@@ -5,4 +5,4 @@ Feature: Deindeal login
     Given I am on the homepage as an existing visitor
     When I click the Sign In button
     And I enter the "random" and "password"
-    Then I should see the "errorMesseges_unregistered_email" alert
+    Then I should see the "errorMessages_unregistered_email" alert

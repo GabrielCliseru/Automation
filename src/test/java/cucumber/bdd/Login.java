@@ -7,6 +7,8 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.lang.reflect.Field;
+import java.util.Properties;
 
 
 public class Login extends UtilsDeindeal {
@@ -39,16 +41,36 @@ public class Login extends UtilsDeindeal {
 
     @Then("^I should see the \"([^\"]*)\" alert$")
     public void I_should_see_the_alert(String propertiesCommonPart){
-//        String[] properties = propertiesCommonPart.split("_");
-//
-//        try {
-//            Properties propUnderUser = UtilsDeindeal.class.getDeclaredField(properties[0]);
-//        } catch (NoSuchFieldException e) {
-//            e.printStackTrace();
-//        }
+        String[] properties = propertiesCommonPart.split("_");
+        Field fieldUnderUse = null;
+        Properties propertiesUserUse = null;
+        UtilsDeindeal utilsDeindeal = new UtilsDeindeal();
+
+        try {
+            fieldUnderUse = utilsDeindeal.getClass().getDeclaredField(properties[0]);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
 
 
-        String containingText = driver.findElement(By.cssSelector(errorMessages.getProperty(propertiesCommonPart+"_loc"))).getText();
-        Assert.assertTrue("The error messages do not match",containingText.equalsIgnoreCase(errorMessages.getProperty(propertiesCommonPart+"_msg")));
+        try {
+            propertiesUserUse = (Properties) fieldUnderUse.get(utilsDeindeal);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+
+        //reconstruct the common part of the identifiers
+        //we can reuse the old incoming string.
+        propertiesCommonPart = "";
+        for (int i=1;i<properties.length;i++){
+            propertiesCommonPart += properties[i]+"_";
+        }
+
+        String locator = propertiesUserUse.getProperty(propertiesCommonPart + "loc");
+        String message = propertiesUserUse.getProperty(propertiesCommonPart + "msg");
+
+        String containingText = driver.findElement(By.cssSelector(locator)).getText();
+        Assert.assertTrue("The error messages do not match",containingText.equalsIgnoreCase(message));
     }
 }

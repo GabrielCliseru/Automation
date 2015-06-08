@@ -1,37 +1,46 @@
 package cucumber.bdd;
 
-import cucumber.api.PendingException;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.When;
 import junit.framework.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import sun.text.normalizer.UTF16;
 
-import javax.enterprise.inject.New;
 import java.io.*;
-import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Random;
 import java.util.List;
-import java.io.FileInputStream;
 import java.util.Properties;
+import java.util.Random;
 
 
 public class UtilsDeindeal extends SetupDriver {
 
     public String cityName,cityNameID;
+    public Properties errorMessages = readErrorMessagesFile("errorMessages");
     String newEmailAddress = generateEmailAddress();
     String newPassword = generateString();
     WebDriverWait wait = new WebDriverWait(driver, 5);
 
-    Properties errorMessages = readErrorMessagesFile("errorMessages");
+    public static void mouseActions(WebElement element, String link) throws InterruptedException {
+        Actions act = new Actions(driver);
+        act.moveToElement(element).perform();
+        while (!driver.findElement(By.linkText(link)).isDisplayed()) {
+            Thread.sleep(250);
+        }
+        driver.findElement(By.linkText(link)).click();
+    }
+
+    public static void mouseActions(String link1, String link2) throws InterruptedException {
+        WebElement element = driver.findElement(By.linkText(link1));
+        Actions act = new Actions(driver);
+        act.moveToElement(element).perform();
+        while (!driver.findElement(By.linkText(link1)).isDisplayed()) {
+            Thread.sleep(250);
+        }
+        driver.findElement(By.linkText(link2)).click();
+    }
 
     public Properties readErrorMessagesFile(String fileName){
         Properties propFile = new Properties();
@@ -102,27 +111,6 @@ public class UtilsDeindeal extends SetupDriver {
 
     public void openSection(String section) {
         driver.findElement(By.linkText(section)).click();
-    }
-
-
-
-    public static void mouseActions(WebElement element, String link) throws InterruptedException {
-        Actions act = new Actions(driver);
-        act.moveToElement(element).perform();
-        while (!driver.findElement(By.linkText(link)).isDisplayed()) {
-            Thread.sleep(250);
-        }
-        driver.findElement(By.linkText(link)).click();
-    }
-
-    public static void mouseActions(String link1, String link2) throws InterruptedException {
-        WebElement element = driver.findElement(By.linkText(link1));
-        Actions act = new Actions(driver);
-        act.moveToElement(element).perform();
-        while (!driver.findElement(By.linkText(link1)).isDisplayed()) {
-            Thread.sleep(250);
-        }
-        driver.findElement(By.linkText(link2)).click();
     }
 
     public String[] splitURLToSections(String URL){
