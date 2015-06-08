@@ -37,19 +37,12 @@ public class Login extends Utils {
 
     @Then("^I should not see the \"([^\"]*)\" popup$")
     public void I_should_not_see_the_popup(String pageType){
-        if(pageType.equalsIgnoreCase("login")){
-            while(driver.findElement(By.id("popupPlaceholder")).isDisplayed()) {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            Assert.assertFalse("newsletter container visible", driver.findElement(By.id("popupPlaceholder")).isDisplayed());
-        }if(pageType.equalsIgnoreCase("new page")){
-            if (driver.findElement(By.cssSelector("#popupPlaceholder_wrapper")).isDisplayed()){
-                driver.findElement(By.cssSelector("#subscriptionLpPopup .actions a")).click();
-            }
-        }
+        Util_I_should_not_see_the_popup(pageType);
+    }
+
+    @Then("^I should see the \"([^\"]*)\" alert$")
+    public void I_should_see_the_alert(String propertiesCommonPart){
+        String containingText = driver.findElement(By.cssSelector(errorMessages.getProperty(propertiesCommonPart+"_loc"))).getText();
+        Assert.assertTrue("The error messages do not match",containingText.equalsIgnoreCase(errorMessages.getProperty(propertiesCommonPart+"_msg")));
     }
 }

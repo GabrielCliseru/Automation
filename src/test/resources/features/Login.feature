@@ -1,8 +1,8 @@
 Feature: Deindeal login
 
   @login
-  Scenario: Deindeal login
-    Given I am on the homepage
+  Scenario: Deindeal login fail
+    Given I am on the homepage as an existing visitor
     When I click the Sign In button
     And I enter the "random" and "password"
-    Then I should not see the "login" popup
+    Then I should see the "unregistered_email" alert

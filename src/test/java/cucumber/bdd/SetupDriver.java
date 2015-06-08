@@ -14,7 +14,11 @@ public class SetupDriver{
         if (driver.equalsIgnoreCase("firefox"))
             return new FirefoxDriver();
         else if (driver.equalsIgnoreCase("chrome")) {
+            String OS = System.getProperty("os.name").toLowerCase();
             System.setProperty("webdriver.chrome.driver", "target/test-classes/chromedriver.exe");
+            if(OS.contains("nix") || OS.contains("nux") || OS.indexOf("aix") > 0 ){
+                System.setProperty("webdriver.chrome.driver", "target/test-classes/chromedriver");
+            }
             return new ChromeDriver();
         }
         return new FirefoxDriver();
