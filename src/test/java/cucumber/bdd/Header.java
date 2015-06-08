@@ -9,6 +9,7 @@ import cucumber.api.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,6 @@ import java.util.List;
  * Created by IEUser on 4/24/2015.
  */
 public class Header extends Utils {
-//    @Before("@NavigateToAllChannels")
 
 
     @And("^language is set to \"([^\"]*)\"$")
@@ -72,5 +72,11 @@ public class Header extends Utils {
         contactNumberLink.click();
         String afterLink = driver.getCurrentUrl();
         Assert.assertTrue("the contact number is a link",prevLink.equals(afterLink));
+    }
+
+    @When("^I click the \"([^\"]*)\" link$")
+    public void I_click_the_link(String arg1) throws Throwable {
+        WebElement contactUsLink = driver.findElement(By.className("write-us"));
+
     }
 }
