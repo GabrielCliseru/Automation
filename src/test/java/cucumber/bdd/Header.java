@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Created by IEUser on 4/24/2015.
  */
-public class Header extends Utils {
+public class Header extends UtilsDeindeal {
 
 
     @And("^language is set to \"([^\"]*)\"$")
