@@ -24,7 +24,7 @@ import java.io.FileInputStream;
 import java.util.Properties;
 
 
-public class Utils extends SetupDriver {
+public class UtilsDeindeal extends SetupDriver {
 
     public String cityName,cityNameID;
     String newEmailAddress = generateEmailAddress();

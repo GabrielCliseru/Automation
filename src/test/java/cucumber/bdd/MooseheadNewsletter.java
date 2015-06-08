@@ -1,7 +1,5 @@
 package cucumber.bdd;
 
-import org.openqa.selenium.support.PageFactory;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -11,7 +9,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class MooseheadNewsletter extends Utils {
+public class MooseheadNewsletter extends UtilsDeindeal {
 
     @When("^I navigate to the \"([^\"]*)\" section$")
     public void I_navigate_to_the_section(String sectionName){

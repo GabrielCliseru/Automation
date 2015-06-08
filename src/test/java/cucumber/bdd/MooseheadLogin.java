@@ -1,19 +1,10 @@
 package cucumber.bdd;
 
 import cucumber.api.java.en.When;
-import junit.framework.Assert;
-import org.openqa.selenium.By;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import java.util.Random;
-import java.io.*;
-
-public class MooseheadLogin extends Utils {
+public class MooseheadLogin extends UtilsDeindeal {
     @When("^I login into Moosehead$")
     public void I_click_the_Sign_In_button() {
         driver.navigate().to("http://www.deindeal.ch/admins/sign_in");

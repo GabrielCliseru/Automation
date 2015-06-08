@@ -2,12 +2,11 @@ package cucumber.bdd;
 
 import cucumber.api.java.en.Given;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.PageFactory;
 
 /**
  * Created by IEUser on 4/27/2015.
  */
-public class UtilSteps extends Utils{
+public class UtilSteps extends UtilsDeindeal {
     @Given("^I navigate to staging \"([^\"]*)\"$")
     public String I_navigate_to_staging(String stagingNumber){
         String stg="";

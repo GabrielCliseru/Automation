@@ -1,18 +1,15 @@
 package cucumber.bdd;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 
-public class Login extends Utils {
+
+public class Login extends UtilsDeindeal {
     @When("^I click the Sign In button$")
     public void I_click_the_Sign_In_button(){
         WebElement LoginRegisterButton = driver.findElement(By.className("lnk-login"));
@@ -42,6 +39,15 @@ public class Login extends Utils {
 
     @Then("^I should see the \"([^\"]*)\" alert$")
     public void I_should_see_the_alert(String propertiesCommonPart){
+//        String[] properties = propertiesCommonPart.split("_");
+//
+//        try {
+//            Properties propUnderUser = UtilsDeindeal.class.getDeclaredField(properties[0]);
+//        } catch (NoSuchFieldException e) {
+//            e.printStackTrace();
+//        }
+
+
         String containingText = driver.findElement(By.cssSelector(errorMessages.getProperty(propertiesCommonPart+"_loc"))).getText();
         Assert.assertTrue("The error messages do not match",containingText.equalsIgnoreCase(errorMessages.getProperty(propertiesCommonPart+"_msg")));
     }

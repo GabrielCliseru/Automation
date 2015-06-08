@@ -1,9 +1,6 @@
 package cucumber.bdd;
 
-import cucumber.api.PendingException;
-import cucumber.api.Scenario;
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
@@ -11,7 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
-public class Newsletter extends Utils {
+public class Newsletter extends UtilsDeindeal {
     Homepage Homepage = PageFactory.initElements(driver, Homepage.class);
     Newsletter Newsletter = PageFactory.initElements(driver, Newsletter.class);
 
