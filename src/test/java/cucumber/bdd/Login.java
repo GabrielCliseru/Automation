@@ -6,6 +6,7 @@ import cucumber.api.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.lang.reflect.Field;
 import java.util.Properties;
@@ -69,6 +70,8 @@ public class Login extends UtilsDeindeal {
 
         String locator = propertiesUserUse.getProperty(propertiesCommonPart + "loc");
         String message = propertiesUserUse.getProperty(propertiesCommonPart + "msg");
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(locator)));
 
         String containingText = driver.findElement(By.cssSelector(locator)).getText();
         Assert.assertTrue("The error messages do not match",containingText.equalsIgnoreCase(message));
