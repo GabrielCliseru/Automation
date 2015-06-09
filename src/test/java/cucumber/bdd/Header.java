@@ -1,17 +1,12 @@
 package cucumber.bdd;
 
-import cucumber.api.PendingException;
-import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,7 +30,9 @@ public class Header extends UtilsDeindeal {
 
     @Then("^I should land on \"([^\"]*)\"$")
     public void I_should_land_on(String incomingString) {
-        Assert.assertTrue("Landed on " + driver.getCurrentUrl() + " instead of " + incomingString, incomingString.equalsIgnoreCase(incomingString));
+        String URL = driver.getCurrentUrl();
+        String URLtoTest = "http://www.deindeal.ch"+incomingString;
+        Assert.assertTrue("Landed on " + URL + " instead of " + URLtoTest, URLtoTest.equalsIgnoreCase(URL));
     }
 
     @When("^I click the header \"([^\"]*)\" link$")
@@ -44,34 +41,34 @@ public class Header extends UtilsDeindeal {
         List<WebElement> links = driver.findElements(By.cssSelector("#trustedElements a"));
         for (WebElement link : links) {
             if (link.getText().equalsIgnoreCase(linkName)) {
+                link.click();
                 flag = true;
                 break;
             }
         }
 
         if (!flag) {
-            Assert.assertTrue("The links is not found", 1 == 1);
+            Assert.assertFalse("The link is not found", 1 == 1);
         }
     }
 
 
     @Then("^I should see \"([^\"]*)\"$")
-    public WebElement I_should_see(String contactNumber) throws Throwable {
+    public WebElement I_should_see(String contactNumber){
         List<WebElement> headerLinks = driver.findElements(By.cssSelector("#trustedElements>li"));
         WebElement link = headerLinks.get(2);
-        if (!contactNumber.equalsIgnoreCase("qwe")){
-            Assert.assertTrue("The contact number is wrong",link.getText().equals(contactNumber));
-        }
+        Assert.assertTrue("The contact number is wrong",link.getText().equals(contactNumber));
         return link;
     }
 
     @And("^\"([^\"]*)\" should not be a link$")
-    public void should_not_be_a_link(String arg1) throws Throwable {
+    public void should_not_be_a_link(String incomingText){
         String prevLink = driver.getCurrentUrl();
-        WebElement contactNumberLink = I_should_see("qwe");
+        WebElement contactNumberLink = null;
+        contactNumberLink = I_should_see(incomingText);
         contactNumberLink.click();
         String afterLink = driver.getCurrentUrl();
-        Assert.assertTrue("the contact number is a link",prevLink.equals(afterLink));
+        Assert.assertTrue("The contact number is a link",prevLink.equals(afterLink));
     }
 
     @When("^I click the \"([^\"]*)\" link$")

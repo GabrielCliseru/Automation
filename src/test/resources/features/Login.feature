@@ -1,6 +1,6 @@
 Feature: Deindeal login
 
-  @login
+  @login @readyToRun
   Scenario: Deindeal login fail
     Given I am on the homepage as an existing visitor
     When I click the Sign In button

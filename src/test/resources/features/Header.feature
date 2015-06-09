@@ -1,8 +1,9 @@
 Feature: Header
 Background: I should not see the "new page" popup
 
+  @readyToRun
   Scenario Outline: Header discount information link validation
-    Given I am on the homepage as an existing visitor
+    Given I am on the homepage as an existing visitor on "<language>"
     And language is set to "<language>"
     When I click the header "<discount>" link
     Then I should land on "<discountlink>"
@@ -11,22 +12,18 @@ Background: I should not see the "new page" popup
     | DE       | BIS ZU 70% RABATT *  | /de/wie-funktioniert-deindeal#anchor-lower   |
     | FR       | DE REMISE MAXIMALE * | /fr/comment-fonctionne-deindeal#anchor-lower |
 
-#  Scenario: Header validation
-#  Given I am on the homepage
-#  And language is set to "DE"
-#  When I click the "BIS ZU 70% RABATT *" link
-#  Then I should land on "http://www.deindeal.ch/de/wie-funktioniert-deindeal#anchor-lower"
-
+  @readyToRun
   Scenario Outline: Header refund information link validation
-    Given I am on the homepage as an existing visitor
+    Given I am on the homepage as an existing visitor on "<language>"
     And language is set to "<language>"
     When I click the header "<refund>" link
     Then I should land on "<refundlink>"
   Examples:
     | language | refund                     | refundlink                                                         |
-    | DE       | 14 TAGE RÜCKGABERECHT      | /de/wie-funktioniert-deindeal#anchor-lower   |
+    | DE       | 14 TAGE RÃ¼ckgaberecht      | /de/wie-funktioniert-deindeal#anchor-lower   |
     | FR       | DROIT DE RETOUR : 14 JOURS | /fr/comment-fonctionne-deindeal#anchor-lower |
 
+  @readyToRun
   Scenario Outline: Header customer care phone number link validation
     Given I am on the homepage as an existing visitor
     And language is set to "<language>"
