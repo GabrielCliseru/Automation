@@ -19,6 +19,8 @@ public class UtilsDeindeal extends SetupDriver {
 
     public String cityName,cityNameID;
     public Properties errorMessages = readErrorMessagesFile("errorMessages");
+    //This is used to store the channel to be opened
+    public String channelToOpen = null;
     String newEmailAddress = generateEmailAddress();
     String newPassword = generateString();
     WebDriverWait wait = new WebDriverWait(driver, 5);

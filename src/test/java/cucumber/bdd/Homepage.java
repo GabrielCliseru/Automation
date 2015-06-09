@@ -49,7 +49,7 @@ public class Homepage extends UtilsDeindeal {
     }
 
     @Given("^I am on the homepage as an existing visitor on \"([^\"]*)\"$")
-    public void I_am_on_the_homepage_as_an_existing_visitor_on(String language) throws Throwable {
+    public void I_am_on_the_homepage_as_an_existing_visitor_on(String language){
         driver.get("http://www.deindeal.ch/"+language+"/?src=newsletter");
     }
 }

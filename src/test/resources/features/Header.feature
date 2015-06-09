@@ -34,21 +34,22 @@ Background: I should not see the "new page" popup
     | DE       | LOKALTARIF 0848 500 501   |
     | FR       | TARIF LOCALE 0848 500 501 |
 
+    @workaroundRequired
   Scenario Outline: Header Kontakt form link validation
     Given I am on the homepage as an existing visitor on "<language>"
     And language is set to "<language>"
-    When I click the "<Kontakt>" link
+    When I click the header "<Kontakt>" link
     Then I should land on "<Kontakt_form>"
   Examples:
     | language | Kontakt     | Kontakt_form                               |
-    | DE       | SCHREIB UNS | /de/wie-funktioniert-deindeal#anchor-lower |
-    | FR       | ECRIS-NOUS  | /fr/contacter                              |
+    | de       | SCHREIB UNS | /de/wie-funktioniert-deindeal#anchor-lower |
+    | fr       | ECRIS-NOUS  | /fr/contacter                              |
 
 
   @NavigateToAllChannels
   Scenario Outline: Header language select validation
     # Selecting the channel page is done from the header
-    Given I am on the "<channel_page>" 
+    Given I am on "any" channel as an existing visitor
     When I select "<language>"
     Then I should see "<language>" selected
     # The URL in the browser should be the corresponding one for each language
