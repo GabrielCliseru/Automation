@@ -25,7 +25,7 @@ Background: I should not see the "new page" popup
 
   @readyToRun
   Scenario Outline: Header customer care phone number link validation
-    Given I am on the homepage as an existing visitor
+    Given I am on the homepage as an existing visitor on "<language>"
     And language is set to "<language>"
     Then I should see "<customer_care_number>"
     And "<customer_care_number>" should not be a link
@@ -35,7 +35,7 @@ Background: I should not see the "new page" popup
     | FR       | TARIF LOCALE 0848 500 501 |
 
   Scenario Outline: Header Kontakt form link validation
-    Given I am on the homepage as an existing visitor
+    Given I am on the homepage as an existing visitor on "<language>"
     And language is set to "<language>"
     When I click the "<Kontakt>" link
     Then I should land on "<Kontakt_form>"
