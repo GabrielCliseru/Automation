@@ -1,5 +1,6 @@
 package cucumber.bdd;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -71,4 +72,10 @@ public class Header extends UtilsDeindeal {
         Assert.assertTrue("The contact number is a link",prevLink.equals(afterLink));
     }
 
+    @When("^I click the DeinDeal logo$")
+    public void I_click_the_DeinDeal_logo() throws Throwable {
+        WebElement DeinDealLogo = driver.findElement(By.id("logo"));
+        DeinDealLogo.click();
+        throw new PendingException();
+    }
 }

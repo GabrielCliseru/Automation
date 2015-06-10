@@ -52,4 +52,12 @@ public class Homepage extends UtilsDeindeal {
     public void I_am_on_the_homepage_as_an_existing_visitor_on(String language){
         driver.get("http://www.deindeal.ch/"+language+"/?src=newsletter");
     }
+
+    @Then("^I should land on homepage$")
+    public void I_should_land_on_homepage() throws Throwable {
+        String currentLink = driver.getCurrentUrl();
+        String homepageLink = "http://www.deindeal.ch/de";
+        Assert.assertTrue("This is not the homepage",homepageLink.equals(currentLink));
+        throw new PendingException();
+    }
 }

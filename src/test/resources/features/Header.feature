@@ -45,7 +45,6 @@ Feature: Header
       | FR       | ECRIS-NOUS  | /fr/contacter |
 
 
-    #TODO: Must find a solution to pass variables between test classes and test runs
   @NavigateToAllChannels
   Scenario Outline: Header language select validation
     # Selecting the channel page is done from the header
@@ -61,9 +60,9 @@ Feature: Header
 
   @NavigateToAllChannels
   Scenario Outline: Header DeinDeal logo redirect validation
-    Given I am on the "<channel_page>"
+    Given I am on "any" channel as an existing visitor
     And language is set to "<language>"
-    When I click the DeinDeal logo
+    When I click the DeinDeal logoooooooooooooo
     Then I should land on homepage
     Examples:
       | language |
