@@ -41,11 +41,12 @@ Feature: Header
     Then I should land on "<Kontakt_form>"
     Examples:
       | language | Kontakt     | Kontakt_form  |
-      | de       | SCHREIB UNS | /de/kontakt   |
-      | fr       | ECRIS-NOUS  | /fr/contacter |
+      | DE       | SCHREIB UNS | /de/kontakt   |
+      | FR       | ECRIS-NOUS  | /fr/contacter |
 
 
   @NavigateToAllChannels
+    #TODO: Must find a solution to pass variables between test classes and test runs
   Scenario Outline: Header language select validation
     # Selecting the channel page is done from the header
     Given I am on "any" channel as an existing visitor
