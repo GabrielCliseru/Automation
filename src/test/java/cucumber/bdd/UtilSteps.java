@@ -62,6 +62,6 @@ public class UtilSteps extends UtilsDeindeal {
     public void channel_url_is_set_to(String language){
         String currentURL = driver.getCurrentUrl();
         Assert.assertTrue("The url does not contain the desired language", currentURL.contains(language.toLowerCase()));
-        Assert.assertTrue("After the language change the channel has not been kept",currentURL.contains(channelToOpen));
+        Assert.assertTrue("After the language change the channel has not been kept",currentURL.contains(getChannelToOpen()));
     }
 }

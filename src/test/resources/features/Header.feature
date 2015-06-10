@@ -45,8 +45,8 @@ Feature: Header
       | FR       | ECRIS-NOUS  | /fr/contacter |
 
 
-  @NavigateToAllChannels
     #TODO: Must find a solution to pass variables between test classes and test runs
+  @NavigateToAllChannels
   Scenario Outline: Header language select validation
     # Selecting the channel page is done from the header
     Given I am on "any" channel as an existing visitor

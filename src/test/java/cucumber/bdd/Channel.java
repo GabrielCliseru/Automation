@@ -35,8 +35,17 @@ public class Channel extends UtilsDeindeal {
             List<WebElement> channels = driver.findElements(By.cssSelector(".channel-item"));
             Random rand = new Random();
             int i = rand.nextInt(channels.size());
-            WebElement chosenChannel = channels.get(i);
-            channelToOpen = chosenChannel.getAttribute("data-subdomain");
+            WebElement chosenChannel;
+            String currentChannelName;
+
+            do {
+                chosenChannel = channels.get(i);
+                currentChannelName = chosenChannel.getAttribute("data-subdomain");
+            }
+            while(currentChannelName.equalsIgnoreCase("love"));
+
+            setChannelToOpen(currentChannelName);
+
             chosenChannel.click();
         }
     }
