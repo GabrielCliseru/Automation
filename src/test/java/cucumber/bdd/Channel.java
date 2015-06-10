@@ -1,5 +1,6 @@
 package cucumber.bdd;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
@@ -32,6 +33,28 @@ public class Channel extends UtilsDeindeal {
     public void I_am_on_channel_as_an_existing_visitor(String channelName){
         if(channelName.equalsIgnoreCase("any")){
             driver.get("http://www.deindeal.ch/de/?src=newsletter");
+            List<WebElement> channels = driver.findElements(By.cssSelector(".channel-item"));
+            Random rand = new Random();
+            int i = rand.nextInt(channels.size());
+            WebElement chosenChannel;
+            String currentChannelName;
+
+            do {
+                chosenChannel = channels.get(i);
+                currentChannelName = chosenChannel.getAttribute("data-subdomain");
+            }
+            while(currentChannelName.equalsIgnoreCase("love"));
+
+            setChannelToOpen(currentChannelName);
+
+            chosenChannel.click();
+        }
+    }
+
+    @Given("^I am on \"([^\"]*)\" channel as an existing visitor on \"([^\"]*)\"$")
+    public void I_am_on_channel_as_an_existing_visitor_on(String channelName, String language){
+        if(channelName.equalsIgnoreCase("any")){
+            driver.get("http://www.deindeal.ch/"+language+"/?src=newsletter");
             List<WebElement> channels = driver.findElements(By.cssSelector(".channel-item"));
             Random rand = new Random();
             int i = rand.nextInt(channels.size());

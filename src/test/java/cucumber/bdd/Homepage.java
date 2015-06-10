@@ -54,10 +54,9 @@ public class Homepage extends UtilsDeindeal {
     }
 
     @Then("^I should land on homepage$")
-    public void I_should_land_on_homepage() throws Throwable {
+    public void I_should_land_on_homepage(){
         String currentLink = driver.getCurrentUrl();
-        String homepageLink = "http://www.deindeal.ch/de";
-        Assert.assertTrue("This is not the homepage",homepageLink.equals(currentLink));
-        throw new PendingException();
+        String homepageLink = "http://www.deindeal.ch/";
+        Assert.assertTrue("Expected to be on homepage, but landed on "+currentLink, currentLink.contains(homepageLink));
     }
 }

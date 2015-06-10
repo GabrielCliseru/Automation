@@ -76,6 +76,5 @@ public class Header extends UtilsDeindeal {
     public void I_click_the_DeinDeal_logo() throws Throwable {
         WebElement DeinDealLogo = driver.findElement(By.id("logo"));
         DeinDealLogo.click();
-        throw new PendingException();
     }
 }

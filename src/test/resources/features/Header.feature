@@ -58,16 +58,17 @@ Feature: Header
       | DE       |
       | FR       |
 
-  @NavigateToAllChannels
+  @readyToRun
   Scenario Outline: Header DeinDeal logo redirect validation
-    Given I am on "any" channel as an existing visitor
+    Given I am on "any" channel as an existing visitor on "<language>"
     And language is set to "<language>"
-    When I click the DeinDeal logoooooooooooooo
+    When I click the DeinDeal logo
     Then I should land on homepage
+    And language is set to "<language>"
     Examples:
       | language |
-      | DE       |
-      | FR       |
+      | de       |
+      | fr       |
 
   Scenario Outline: Header DeinDeal logo redirect from checkout validation
     Given I am on the checkout page
