@@ -71,9 +71,4 @@ public class Header extends UtilsDeindeal {
         Assert.assertTrue("The contact number is a link",prevLink.equals(afterLink));
     }
 
-//    @When("^I click the \"([^\"]*)\" link$")
-//    public void I_click_the_link(String arg1) throws Throwable {
-//        WebElement contactUsLink = driver.findElement(By.cssSelector(".write-us"));
-//        contactUsLink.click();
-//    }
 }

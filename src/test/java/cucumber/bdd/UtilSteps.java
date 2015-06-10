@@ -6,6 +6,8 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 
 /**
  * Created by IEUser on 4/27/2015.
@@ -37,19 +39,29 @@ public class UtilSteps extends UtilsDeindeal {
         driver.findElement(By.id("admin_remember_me")).click();
     }
 
-    @When("^I select \"([^\"]*)\"$")
-    public void I_select(String language){
-        driver.findElement(By.cssSelector("."+language.toLowerCase())).click();
+    @When("^I select the \"([^\"]*)\" language$")
+    public void I_select_the_language(String language){
+        WebElement langElem = driver.findElement(By.cssSelector("." + language.toLowerCase()));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", langElem);
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        langElem.click();
     }
 
     @Then("^I should see \"([^\"]*)\" selected$")
     public void I_should_see_selected(String language){
         String color = driver.findElement(By.cssSelector("."+language.toLowerCase())).getCssValue("color");
-        Assert.assertTrue("The language text is not highlighted",color.equalsIgnoreCase("#2f2f2f"));
+        Assert.assertTrue("The language text is not highlighted",color.equalsIgnoreCase("rgba(47, 47, 47, 1)"));
     }
 
     @And("^channel url is set to \"([^\"]*)\"$")
     public void channel_url_is_set_to(String language){
-        Assert.assertTrue("The url does not contain the requested language",driver.getCurrentUrl().contains(language.toLowerCase()));
+        String currentURL = driver.getCurrentUrl();
+        Assert.assertTrue("The url does not contain the desired language", currentURL.contains(language.toLowerCase()));
+        Assert.assertTrue("After the language change the channel has not been kept",currentURL.contains(channelToOpen));
     }
 }

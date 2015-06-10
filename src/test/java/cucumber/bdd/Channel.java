@@ -36,6 +36,7 @@ public class Channel extends UtilsDeindeal {
             Random rand = new Random();
             int i = rand.nextInt(channels.size());
             WebElement chosenChannel = channels.get(i);
+            channelToOpen = chosenChannel.getAttribute("data-subdomain");
             chosenChannel.click();
         }
     }

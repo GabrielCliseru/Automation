@@ -19,7 +19,9 @@ public class SetupDriver{
             if(OS.contains("nix") || OS.contains("nux") || OS.indexOf("aix") > 0 ){
                 System.setProperty("webdriver.chrome.driver", "target/test-classes/chromedriver");
             }
-            return new ChromeDriver();
+            WebDriver webdriverOut = new ChromeDriver();
+            webdriverOut.manage().window().maximize();
+            return webdriverOut;
         }
         return new FirefoxDriver();
     }
