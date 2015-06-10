@@ -17,13 +17,13 @@ import java.util.Random;
 
 public class UtilsDeindeal extends SetupDriver {
 
+    //This is used to store the channel to be opened
+    private static String channelToOpen;
     public String cityName,cityNameID;
     public Properties errorMessages = readErrorMessagesFile("errorMessages");
     String newEmailAddress = generateEmailAddress();
     String newPassword = generateString();
     WebDriverWait wait = new WebDriverWait(driver, 5);
-    //This is used to store the channel to be opened
-    private String channelToOpen = null;
 
     public static void mouseActions(WebElement element, String link) throws InterruptedException {
         Actions act = new Actions(driver);

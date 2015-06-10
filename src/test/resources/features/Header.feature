@@ -45,7 +45,7 @@ Feature: Header
       | FR       | ECRIS-NOUS  | /fr/contacter |
 
 
-  @NavigateToAllChannels
+  @readyToRun
   Scenario Outline: Header language select validation
     # Selecting the channel page is done from the header
     Given I am on "any" channel as an existing visitor
