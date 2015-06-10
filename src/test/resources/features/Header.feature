@@ -79,3 +79,55 @@ Feature: Header
       | language |
       | DE       |
       | FR       |
+
+#  Scenario Outline: Header DeinDeal logo redirect from checkout validation
+#    Given I am on the checkout page
+#    And language is set to "<language>"
+#    When I click the DeinDeal logo
+#    Then I should land on homepage
+#    Examples:
+#      | language |
+#      | DE       |
+#      | FR       |
+#
+#  Scenario Outline: Basic search bar verification
+#    Given I am on the the "<channel_page>"
+#    And language is set to "<language>"
+#    Then I should see "<search_hint_text>" and "<search_button>"
+#
+#    Examples:
+#      | language | search_hint_text           | search_button                                |
+#      | DE       | Was suchst du?             | JETZT SUCHEN                                 |
+#      | FR       | Que cherches-tu?           | RECHERCHE                                    |
+#  Scenario Outline: Empty search results
+#   Given I am on the the "<channel_page>"
+#   And language is set to "<language>"
+#   And I see "<search_hint_text>"
+#   When I click the "<search_button>"
+#   Then I should land on "<empty_search_page>"
+#  Examples:
+#      | language | search_hint_text           | search_button                                | empty_search_page                        |
+#      | DE       | Was suchst du?             | JETZT SUCHEN                                 | http://www.deindeal.ch/de/search?q=&l=60 |
+#      | FR       | Que cherches-tu?           | RECHERCHE                                    | http://www.deindeal.ch/fr/search?q=&l=60 |
+#
+#  Scenario Outline: Login/Register button
+#    Given I am on the "<channel_page>"
+#    And language is set to "<language>"
+#    Wnen I click "<login_button>"
+#    Then I should see the login pop up
+#
+#    Examples:
+#      | language | login_button                 |
+#      | DE       | Login / Registrieren         |
+#      | FR       | Se connecter / s'enregistrer |
+#
+#  Scenario Outline: Login/Register button
+#    Given I am on the "<channel_page>"
+#    And language is set to "<language>"
+#  Wnen I click "<cart_button>"
+#    Then I should see the cart pop up
+#
+#  Examples:
+#    | language | cart_button    |
+#    | DE       | Dein Warenkorb |
+#    | FR       | Ton panier     |
