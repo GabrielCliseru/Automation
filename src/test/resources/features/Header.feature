@@ -86,9 +86,9 @@ Feature: Header
     Then I should see "<search_hint_text>" and "<search_button>"
 
     Examples:
-      | language | search_hint_text           | search_button                                |
-      | de       | Was suchst du?             | JETZT SUCHEN                                 |
-      | fr       | Que cherches-tu?           | RECHERCHE                                    |
+      | language | search_hint_text            | search_button                                |
+      | de       | Was suchst du?              | JETZT SUCHEN                                 |
+      | fr       | Que cherches-tu ?           | RECHERCHE                                    |
 #
 #  Scenario Outline: Empty search results
 #    Given I am on "any" channel as an existing visitor on "<language>"
