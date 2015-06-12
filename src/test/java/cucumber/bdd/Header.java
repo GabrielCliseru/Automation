@@ -77,4 +77,12 @@ public class Header extends UtilsDeindeal {
         WebElement DeinDealLogo = driver.findElement(By.id("logo"));
         DeinDealLogo.click();
     }
+
+    @Then("^I should see \"([^\"]*)\" and \"([^\"]*)\"$")
+    public void I_should_see_and(String search_hint_text, String search_button)  {
+        WebElement searchBox = driver.findElement(By.id("search-box"));
+        WebElement searchButton = driver.findElement(By.id("search-button"));
+        Assert.assertTrue("The text from the search box is wrong",searchBox.getAttribute("placeholder").equals(search_hint_text));
+        Assert.assertTrue("The text from the search button is wrong",searchButton.getText().equals(search_button));
+    }
 }
