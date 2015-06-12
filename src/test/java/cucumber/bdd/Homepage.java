@@ -34,23 +34,35 @@ public class Homepage extends UtilsDeindeal {
     }
 
     @Given("^I am on the homepage on \"([^\"]*)\"$")
-    public void I_am_on_the_homepage_on(String language){
-        driver.get("http://www.deindeal.ch/"+language.toLowerCase());
+    public String I_am_on_the_homepage_on(String language){
+        String url = I_am_on_the_homepage_a_new_visitor();
+        String finalUrl = url+"/"+language.toLowerCase();
+        driver.get(finalUrl);
+        return finalUrl;
     }
 
     @Given("^I am on the homepage as an existing visitor$")
-    public void I_am_on_the_homepage_as_an_existing_visitor(){
-        driver.get("http://www.deindeal.ch/de/?src=newsletter");
+    public String I_am_on_the_homepage_as_an_existing_visitor(){
+        String url = I_am_on_the_homepage_a_new_visitor();
+        String finalUrl = url+"/de/?src=newsletter";
+        driver.get(finalUrl);
+        return finalUrl;
     }
 
     @Given("^I am on the homepage as a new visitor$")
-    public void I_am_on_the_homepage_a_new_visitor(){
-        driver.get("http://www.deindeal.ch/de/");
+    public String I_am_on_the_homepage_a_new_visitor(){
+        String url = "http://www.deindeal.ch";
+        String finalUrl = url+"/de";
+        driver.get(finalUrl);
+        return url;
     }
 
     @Given("^I am on the homepage as an existing visitor on \"([^\"]*)\"$")
-    public void I_am_on_the_homepage_as_an_existing_visitor_on(String language){
-        driver.get("http://www.deindeal.ch/"+language+"/?src=newsletter");
+    public String I_am_on_the_homepage_as_an_existing_visitor_on(String language){
+        String url = I_am_on_the_homepage_on(language);
+        String finalUrl = url+"/?src=newsletter";
+        driver.get(finalUrl);
+        return  finalUrl;
     }
 
     @Then("^I should land on homepage$")
