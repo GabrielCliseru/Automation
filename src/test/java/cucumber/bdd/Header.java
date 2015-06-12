@@ -1,6 +1,5 @@
 package cucumber.bdd;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -78,22 +77,22 @@ public class Header extends UtilsDeindeal {
         DeinDealLogo.click();
     }
 
-    @Then("^I should see \"([^\"]*)\" and \"([^\"]*)\"$")
-    public void I_should_see_and(String search_hint_text, String search_button)  {
+    @Then("^the search section should contain \"([^\"]*)\" and \"([^\"]*)\"$")
+    public void the_search_section_should_contain_and(String search_hint_text, String search_button)  {
         WebElement searchBox = driver.findElement(By.id("search-box"));
         WebElement searchButton = driver.findElement(By.id("search-button"));
         Assert.assertTrue("The text from the search box is wrong",searchBox.getAttribute("placeholder").equals(search_hint_text));
         Assert.assertTrue("The text from the search button is wrong",searchButton.getText().equals(search_button));
     }
 
-    @And("^I see \"([^\"]*)\"$")
-    public void I_see(String search_hint_text) {
+    @And("^I see \"([^\"]*)\" on the search input$")
+    public void I_see_on_the_search_input(String search_hint_text) {
         WebElement searchBox = driver.findElement(By.id("search-box"));
         Assert.assertTrue("The text from the search box is wrong",searchBox.getAttribute("placeholder").equals(search_hint_text));
     }
 
-    @When("^I click the \"([^\"]*)\"$")
-    public void I_click_the(String arg1)  {
+    @When("^I click the search button$")
+    public void I_click_the_search_button()  {
         WebElement searchButton = driver.findElement(By.id("search-button"));
         searchButton.click();
     }
