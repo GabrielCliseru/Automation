@@ -87,24 +87,24 @@ Feature: Header
   Scenario Outline: Basic search bar verification
     Given I am on "any" channel as an existing visitor on "<language>"
     And language is set to "<language>"
-    Then I should see "<search_hint_text>" and "<search_button>"
+    Then the search section should contain "<search_hint_text>" and "<search_button>"
 
     Examples:
-      | language | search_hint_text            | search_button                                |
-      | de       | Was suchst du?              | JETZT SUCHEN                                 |
-      | fr       | Que cherches-tu ?           | RECHERCHE                                    |
+      | language | search_hint_text            | search_button |
+      | de       | Was suchst du?              | JETZT SUCHEN  |
+      | fr       | Que cherches-tu ?           | RECHERCHE     |
 
   @readyToRun
   Scenario Outline: Empty search results
     Given I am on "any" channel as an existing visitor on "<language>"
     And language is set to "<language>"
-    And I see "<search_hint_text>"
-    When I click the "<search_button>"
+    And I see "<search_hint_text>" on the search input
+    When I click the search button
     Then I should land on "<empty_search_page>"
   Examples:
-      | language | search_hint_text            | search_button                                | empty_search_page  |
-      | DE       | Was suchst du?              | JETZT SUCHEN                                 | /de/search?q=&l=60 |
-      | FR       | Que cherches-tu ?           | RECHERCHE                                    | /fr/search?q=&l=60 |
+      | language | search_hint_text            | empty_search_page  |
+      | DE       | Was suchst du?              | /de/search?q=&l=60 |
+      | FR       | Que cherches-tu ?           | /fr/search?q=&l=60 |
 
 #  Scenario Outline: Login/Register button
 #    Given I am on "any" channel as an existing visitor on "<language>"
