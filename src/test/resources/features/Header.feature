@@ -70,11 +70,14 @@ Feature: Header
       | de       |
       | fr       |
 
+    @gabi
   Scenario Outline: Header DeinDeal logo redirect from checkout validation
-    Given I am on the checkout page
-    And language is set to "<language>"
-    When I click the DeinDeal logo
-    Then I should land on homepage
+      Given I am on "any" channel as an existing visitor
+      Given I enter a random collection
+#    Given I am on the checkout page
+#    And language is set to "<language>"
+#    When I click the DeinDeal logo
+#    Then I should land on homepage
     Examples:
       | language |
       | DE       |
@@ -104,7 +107,7 @@ Feature: Header
 #  Scenario Outline: Login/Register button
 #    Given I am on "any" channel as an existing visitor on "<language>"
 #    And language is set to "<language>"
-#    Wnen I click "<login_button>"
+#    When I click "<login_button>"
 #    Then I should see the login pop up
 #
 #    Examples:
@@ -115,7 +118,7 @@ Feature: Header
 #  Scenario Outline: Login/Register button
 #    Given I am on "any" channel as an existing visitor on "<language>"
 #    And language is set to "<language>"
-#    Wnen I click "<cart_button>"
+#    When I click "<cart_button>"
 #    Then I should see the cart pop up
 #
 #  Examples:

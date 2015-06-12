@@ -15,28 +15,36 @@ public class Channel extends UtilsDeindeal {
     @When("^I enter a random collection$")
     public int I_enter_a_random_collection()
     {
-        List<WebElement> collectionNames;
+        List<WebElement> collectionObjects;
         Random rand = new Random();
+        int i;
+        String collectionID = "";
+        WebElement currentElement;
 
-        if (driver.findElements(By.cssSelector("[data-tracking-type='collection']")).size() != 0){
-            collectionNames = driver.findElements(By.cssSelector("[data-tracking-type='collection']"));
+        String[] collectionsSelector = {"[data-tracking-type='collection']", "#collectionsWrapper li"};
+        if (driver.findElements(By.cssSelector(collectionsSelector[0])).size() != 0){
+            collectionObjects = driver.findElements(By.cssSelector(collectionsSelector[0]));
         }
         else {
-            collectionNames = driver.findElements(By.cssSelector("#collectionsWrapper li"));
+            collectionObjects = driver.findElements(By.cssSelector(collectionsSelector[1]));
         }
 
-        int i = rand.nextInt(collectionNames.size());
-        //pe asta l-am pus aici ca sa nu mai facem mereu operatiunea de cautare in obiectul sau, deja il folosim de 2 ori
-        //mai jos
-        WebElement currentElement = collectionNames.get(i);
-        String collectionID = "";
-        if(currentElement.isDisplayed()){
+        do {
+            i = rand.nextInt(collectionObjects.size());
+            currentElement = collectionObjects.get(i);
             collectionID = currentElement.getAttribute("data-tracking-id");
-        }else{
-//            currentElement.
-        }
-        currentElement.click();
+            if (i>=3&&i<=5){
+                if (i==3){
+                    driver.findElements(By.cssSelector("#channelCarousel .pagination li")).get(0).click();
+                }if (i==4){
+                    driver.findElements(By.cssSelector("#channelCarousel .pagination li")).get(1).click();
+                }else{
+                    driver.findElements(By.cssSelector("#channelCarousel .pagination li")).get(2).click();
+                }
+            }
+        }while(!currentElement.isDisplayed()&&currentElement.isEnabled());
 
+        currentElement.click();
         return Integer.parseInt(collectionID);
     }
 
