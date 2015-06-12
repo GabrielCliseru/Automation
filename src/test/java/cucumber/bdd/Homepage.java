@@ -52,8 +52,7 @@ public class Homepage extends UtilsDeindeal {
     @Given("^I am on the homepage as a new visitor$")
     public String I_am_on_the_homepage_a_new_visitor(){
         String url = "http://www.deindeal.ch";
-        String finalUrl = url+"/de";
-        driver.get(finalUrl);
+        driver.get(url);
         return url;
     }
 
