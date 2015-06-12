@@ -118,14 +118,16 @@ Feature: Header
       | language | login_button                 |
       | DE       | Login / Registrieren         |
       | FR       | Se connecter / s'enregistrer |
-#
-#  Scenario Outline: Login/Register button
-#    Given I am on "any" channel as an existing visitor on "<language>"
-#    And language is set to "<language>"
-#    When I click "<cart_button>"
-#    Then I should see the cart pop up
-#
-#  Examples:
-#    | language | cart_button    |
-#    | DE       | Dein Warenkorb |
-#    | FR       | Ton panier     |
+
+  @readyToRun
+  Scenario Outline: Cart Pop Up Button
+    Given I am on "any" channel as an existing visitor on "<language>"
+    And language is set to "<language>"
+    And the cart button is named "<cart_button>"
+    When I click  the cart button
+    Then I should see the cart pop up
+
+  Examples:
+    | language | cart_button    |
+    | DE       | Dein Warenkorb |
+    | FR       | Ton panier     |

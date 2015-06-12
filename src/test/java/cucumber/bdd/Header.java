@@ -1,5 +1,6 @@
 package cucumber.bdd;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -113,5 +114,23 @@ public class Header extends UtilsDeindeal {
     public void I_should_see_the_login_pop_up() {
         WebElement loginPopUp = driver.findElement(By.id("popup-login"));
         Assert.assertTrue("Login popup is not displayed",loginPopUp.isDisplayed());
+    }
+
+    @And("^the cart button is named \"([^\"]*)\"$")
+    public void the_cart_button_is_named(String cart_button)  {
+        WebElement cartButton = driver.findElement(By.className("showCartTextLnk"));
+        Assert.assertTrue("The text on the cart button is wrong",cartButton.getText().equals(cart_button));
+    }
+
+    @When("^I click  the cart button$")
+    public void I_click_the_cart_button() {
+        WebElement cartButton = driver.findElement(By.className("showCartTextLnk"));
+        cartButton.click();
+    }
+
+    @Then("^I should see the cart pop up$")
+    public void I_should_see_the_cart_pop_up() {
+        WebElement cartPopUp = driver.findElement(By.id("popup-cart"));
+        Assert.assertTrue("Cart popup is not displayed",cartPopUp.isDisplayed());
     }
 }
