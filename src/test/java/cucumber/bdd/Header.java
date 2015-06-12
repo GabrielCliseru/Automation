@@ -85,4 +85,16 @@ public class Header extends UtilsDeindeal {
         Assert.assertTrue("The text from the search box is wrong",searchBox.getAttribute("placeholder").equals(search_hint_text));
         Assert.assertTrue("The text from the search button is wrong",searchButton.getText().equals(search_button));
     }
+
+    @And("^I see \"([^\"]*)\"$")
+    public void I_see(String search_hint_text) {
+        WebElement searchBox = driver.findElement(By.id("search-box"));
+        Assert.assertTrue("The text from the search box is wrong",searchBox.getAttribute("placeholder").equals(search_hint_text));
+    }
+
+    @When("^I click the \"([^\"]*)\"$")
+    public void I_click_the(String arg1)  {
+        WebElement searchButton = driver.findElement(By.id("search-button"));
+        searchButton.click();
+    }
 }

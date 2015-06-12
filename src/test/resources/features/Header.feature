@@ -83,6 +83,7 @@ Feature: Header
       | DE       |
       | FR       |
 
+  @readyToRun
   Scenario Outline: Basic search bar verification
     Given I am on "any" channel as an existing visitor on "<language>"
     And language is set to "<language>"
@@ -92,18 +93,19 @@ Feature: Header
       | language | search_hint_text            | search_button                                |
       | de       | Was suchst du?              | JETZT SUCHEN                                 |
       | fr       | Que cherches-tu ?           | RECHERCHE                                    |
-#
-#  Scenario Outline: Empty search results
-#    Given I am on "any" channel as an existing visitor on "<language>"
-#    And language is set to "<language>"
-#    And I see "<search_hint_text>"
-#    When I click the "<search_button>"
-#    Then I should land on "<empty_search_page>"
-#  Examples:
-#      | language | search_hint_text           | search_button                                | empty_search_page                        |
-#      | DE       | Was suchst du?             | JETZT SUCHEN                                 | http://www.deindeal.ch/de/search?q=&l=60 |
-#      | FR       | Que cherches-tu?           | RECHERCHE                                    | http://www.deindeal.ch/fr/search?q=&l=60 |
-#
+
+  @readyToRun
+  Scenario Outline: Empty search results
+    Given I am on "any" channel as an existing visitor on "<language>"
+    And language is set to "<language>"
+    And I see "<search_hint_text>"
+    When I click the "<search_button>"
+    Then I should land on "<empty_search_page>"
+  Examples:
+      | language | search_hint_text            | search_button                                | empty_search_page  |
+      | DE       | Was suchst du?              | JETZT SUCHEN                                 | /de/search?q=&l=60 |
+      | FR       | Que cherches-tu ?           | RECHERCHE                                    | /fr/search?q=&l=60 |
+
 #  Scenario Outline: Login/Register button
 #    Given I am on "any" channel as an existing visitor on "<language>"
 #    And language is set to "<language>"
