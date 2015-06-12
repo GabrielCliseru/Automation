@@ -97,4 +97,22 @@ public class Header extends UtilsDeindeal {
         WebElement searchButton = driver.findElement(By.id("search-button"));
         searchButton.click();
     }
+
+    @And("^the login/register button is named \"([^\"]*)\"$")
+    public void the_login_register_button_is_named(String login_button) {
+        WebElement loginButton = driver.findElement(By.className("lnk-login"));
+        Assert.assertTrue("The message on login/register button is wrong",loginButton.getText().equals(login_button));
+    }
+
+    @When("^I click on the login/register button$")
+    public void I_click_on_the_login_register_button() throws Throwable {
+        WebElement loginButton = driver.findElement(By.className("lnk-login"));
+        loginButton.click();
+    }
+
+    @Then("^I should see the login pop up$")
+    public void I_should_see_the_login_pop_up() {
+        WebElement loginPopUp = driver.findElement(By.id("popup-login"));
+        Assert.assertTrue("Login popup is not displayed",loginPopUp.isDisplayed());
+    }
 }

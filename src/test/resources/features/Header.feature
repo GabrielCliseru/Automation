@@ -106,16 +106,18 @@ Feature: Header
       | DE       | Was suchst du?              | JETZT SUCHEN                                 | /de/search?q=&l=60 |
       | FR       | Que cherches-tu ?           | RECHERCHE                                    | /fr/search?q=&l=60 |
 
-#  Scenario Outline: Login/Register button
-#    Given I am on "any" channel as an existing visitor on "<language>"
-#    And language is set to "<language>"
-#    When I click "<login_button>"
-#    Then I should see the login pop up
-#
-#    Examples:
-#      | language | login_button                 |
-#      | DE       | Login / Registrieren         |
-#      | FR       | Se connecter / s'enregistrer |
+  @readyToRun
+  Scenario Outline: Login/Register button
+    Given I am on "any" channel as an existing visitor on "<language>"
+    And language is set to "<language>"
+    And the login/register button is named "<login_button>"
+    When I click on the login/register button
+    Then I should see the login pop up
+
+    Examples:
+      | language | login_button                 |
+      | DE       | Login / Registrieren         |
+      | FR       | Se connecter / s'enregistrer |
 #
 #  Scenario Outline: Login/Register button
 #    Given I am on "any" channel as an existing visitor on "<language>"
