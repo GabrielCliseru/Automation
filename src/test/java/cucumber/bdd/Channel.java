@@ -22,13 +22,15 @@ public class Channel extends UtilsDeindeal {
         String collectionID = "";
         WebElement currentElement;
 
-        String[] collectionsSelector = {"[data-tracking-type='collection']", "#collectionsWrapper li"};
+        String[] collectionsSelector = {"[data-tracking-type='collection']", "#collectionsWrapper li",".productBox"};
         if (driver.findElements(By.cssSelector(collectionsSelector[0])).size() != 0){
             collectionObjects = driver.findElements(By.cssSelector(collectionsSelector[0]));
         }
         else {
             collectionObjects = driver.findElements(By.cssSelector(collectionsSelector[1]));
         }
+
+        //TODO: do the same for outlet and search. They are common
 
         do {
             i = rand.nextInt(collectionObjects.size());
@@ -53,13 +55,14 @@ public class Channel extends UtilsDeindeal {
     public void I_am_on_channel_as_an_existing_visitor(String channelName){
         if(channelName.equalsIgnoreCase("any")){
             homepage.I_am_on_the_homepage_as_an_existing_visitor();
-            List<WebElement> channels = driver.findElements(By.cssSelector(".menu-col-links"));
+            List<WebElement> channels = driver.findElements(By.cssSelector(".channels li"));
             Random rand = new Random();
-            int i = rand.nextInt(channels.size());
+            int i;
             WebElement chosenChannel;
             String currentChannelName;
 
             do {
+                i = rand.nextInt(channels.size());
                 chosenChannel = channels.get(i);
                 currentChannelName = chosenChannel.getAttribute("data-subdomain");
             }
