@@ -50,11 +50,47 @@ Feature: This is the footer of our website
       | FR       | Ringier logo         | http://www.ringier.com/                                                                       |
 
 
-
-
-
-
-
+  Scenario Outline: Footer channel link validation
     Given I am on "<string>" channel as an existing visitor
+    And language is set to "<language>"
+    And I scroll to footer
+    When I click on "<string>" channel from footer
+    Then I should land on correct channel
+
+    Examples:
+      | language | string         |
+      | DE       | Deine Stadt    |
+      | FR       | Ta ville       |
+      | DE       | Extra Coupons  |
+      | FR       | Extra Coupons  |
+      | DE       | Home & Living  |
+      | FR       | Home & Living  |
+      | DE       | Electronics    |
+      | FR       | Electronics    |
+      | DE       | Travel         |
+      | FR       | Travel         |
+      | DE       | Fashion        |
+      | FR       | Fashion        |
+      | DE       | Kids           |
+      | FR       | Kids           |
+      | DE       | Sport          |
+      | FR       | Sport          |
+      | DE       | Wine & Gourmet |
+      | FR       | Wine & Gourmet |
+      | DE       | Love & Play    |
+      | FR       | Love & Play    |
+
+  Scenario Outline: Footer DeinDeal logo redirect validation
+    Given I am on "any" channel as an existing visitor on "<language>"
+    And language is set to "<language>"
+    When I click the DeinDeal logo from footer
+    Then I should land on homepage
+    And language is set to "<language>"
+    Examples:
+      | language |
+      | de       |
+      | fr       |
+
+
 
 
