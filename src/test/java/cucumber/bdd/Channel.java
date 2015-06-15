@@ -5,6 +5,7 @@ import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 import java.util.Random;
@@ -43,7 +44,7 @@ public class Channel extends UtilsDeindeal {
                 }
             }
         }while(!currentElement.isDisplayed()&&currentElement.isEnabled());
-
+        wait.until(ExpectedConditions.visibilityOf(currentElement));
         currentElement.click();
         return Integer.parseInt(collectionID);
     }
@@ -52,7 +53,7 @@ public class Channel extends UtilsDeindeal {
     public void I_am_on_channel_as_an_existing_visitor(String channelName){
         if(channelName.equalsIgnoreCase("any")){
             homepage.I_am_on_the_homepage_as_an_existing_visitor();
-            List<WebElement> channels = driver.findElements(By.cssSelector(".channel-item"));
+            List<WebElement> channels = driver.findElements(By.cssSelector(".menu-col-links"));
             Random rand = new Random();
             int i = rand.nextInt(channels.size());
             WebElement chosenChannel;

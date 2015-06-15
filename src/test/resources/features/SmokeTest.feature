@@ -1,5 +1,6 @@
 Feature: Deindeal Smoketest
-Background: I login into Moosehead
+Background:
+  Given I login into Moosehead
 
   @SnokeTest
   Scenario: Deindeal Smoketest
