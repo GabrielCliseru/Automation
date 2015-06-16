@@ -2,6 +2,7 @@ package cucumber.bdd;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -22,20 +23,27 @@ public class Channel extends UtilsDeindeal {
         String collectionID = "";
         WebElement currentElement;
 
+        /*There are different page types, with different layouts, here we can find an array of locators and we try each
+        // one of them until we manage to find the one that fits. On else there is an error. It will land there when we
+         introduce a new channel template*/
+
         String[] collectionsSelector = {"[data-tracking-type='collection']", "#collectionsWrapper li",".productBox"};
         if (driver.findElements(By.cssSelector(collectionsSelector[0])).size() != 0){
             collectionObjects = driver.findElements(By.cssSelector(collectionsSelector[0]));
-        }
-        else {
+        }else if(driver.findElements(By.cssSelector(collectionsSelector[1])).size() != 0){
             collectionObjects = driver.findElements(By.cssSelector(collectionsSelector[1]));
+        }else if(driver.findElements(By.cssSelector(collectionsSelector[2])).size() != 0){
+            collectionObjects = driver.findElements(By.cssSelector(collectionsSelector[2]));
+        }else {
+            Assert.assertTrue("On page " + driver.getCurrentUrl() + " there is no valid selector for I_enter_a_random_collection", 1 != 1);
+            collectionObjects = null;
         }
-
-        //TODO: do the same for outlet and search. They are common
 
         do {
             i = rand.nextInt(collectionObjects.size());
             currentElement = collectionObjects.get(i);
             collectionID = currentElement.getAttribute("data-tracking-id");
+            //TODO: put a new condition here for the channels without carousels
             if (i>=3&&i<=5){
                 if (i==3){
                     driver.findElements(By.cssSelector("#channelCarousel .pagination li")).get(0).click();
