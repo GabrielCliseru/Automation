@@ -1,6 +1,7 @@
 package cucumber.bdd;
 
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -25,8 +26,17 @@ public class SetupDriver{
             }else{
                 System.setProperty("webdriver.chrome.driver", "target/test-classes/chromedriver.exe");
             }
+
             WebDriver webdriverOut = new ChromeDriver();
-            webdriverOut.manage().window().maximize();
+
+            if(OS.contains("mac") ){
+                Dimension targetSize = new Dimension(1920, 1080); //your screen resolution here
+                webdriverOut.manage().window().setSize(targetSize);
+            }else{
+                webdriverOut.manage().window().maximize();
+            }
+
+
             return webdriverOut;
         }
         return new FirefoxDriver();
