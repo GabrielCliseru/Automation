@@ -91,6 +91,8 @@ Feature: This is the footer of our website
       | de       |
       | fr       |
 
+    a
+
 
 
 
