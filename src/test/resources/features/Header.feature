@@ -74,6 +74,7 @@ Feature: Header
   Scenario Outline: Header DeinDeal logo redirect from checkout validation
       Given I am on "any" channel as an existing visitor
       Given I enter a random collection
+      And I add the deal to the cart
 #    Given I am on the checkout page
 #    And language is set to "<language>"
 #    When I click the DeinDeal logo

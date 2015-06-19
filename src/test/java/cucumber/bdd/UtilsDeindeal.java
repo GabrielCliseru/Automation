@@ -1,18 +1,18 @@
 package cucumber.bdd;
 
+import com.sun.tools.internal.ws.wsdl.document.jaxws.*;
 import junit.framework.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Properties;
-import java.util.Random;
+import java.util.*;
 
 
 public class UtilsDeindeal extends SetupDriver {
@@ -20,8 +20,8 @@ public class UtilsDeindeal extends SetupDriver {
     //This is used to store the channel to be opened
     private static String channelToOpen;
     public String cityName,cityNameID;
-    String url = "http://www.deindeal.ch";
     public Properties errorMessages = readErrorMessagesFile("errorMessages");
+    String url = "http://www.deindeal.ch";
     String newEmailAddress = generateEmailAddress();
     String newPassword = generateString();
     WebDriverWait wait = new WebDriverWait(driver, 5);
@@ -158,5 +158,33 @@ public class UtilsDeindeal extends SetupDriver {
                 driver.findElement(By.cssSelector("#subscriptionLpPopup .skiplink")).click();
             }
         }
+    }
+
+    public boolean isCollectionPage(){
+        boolean collectionPage = true;
+        /*
+        Check if the wrapper for collections is present. If it is we return true, else false
+        */
+        try {
+            driver.findElement(By.cssSelector("#collectionProductList"));
+        }catch (org.openqa.selenium.NoSuchElementException e) {
+            collectionPage = false;
+        }
+
+        return collectionPage;
+    }
+
+    public void scrollToElement(WebElement incElement){
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", incElement);
+        wait.until(ExpectedConditions.visibilityOf(incElement));
+    }
+
+    public WebElement enterRandomCollectionFromCollectionPage(){
+        List<WebElement> listOfCollections = driver.findElements(By.cssSelector("#collectionProductList .productBox"));
+        Random r = new Random();
+        int collectionNumber = r.nextInt(listOfCollections.size());
+        scrollToElement(listOfCollections.get(collectionNumber));
+
+        return listOfCollections.get(collectionNumber);
     }
 }

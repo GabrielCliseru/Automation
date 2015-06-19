@@ -15,10 +15,6 @@ import java.util.List;
 public class Deal extends UtilsDeindeal {
     Channel channel = PageFactory.initElements(driver, Channel.class);
 
-    @When("^FunctionToSeeTheDealClass$")
-    public void FunctionToSeeTheDealClass() {
-    }
-
     public void I_add_a_deal_from_modal(WebElement button) {
         int i = 0;
         int numberOfElementsInTheCart = 0;
@@ -41,6 +37,11 @@ public class Deal extends UtilsDeindeal {
         String type = "mod";
         int numberOfElementsInTheCart;
 
+        /*
+        After the user clicks on a collection from the channel page he might end up on the collection page or not.
+        We have to take him to the deal page by entering a random collection
+         */
+        if(isCollectionPage()) enterRandomCollectionFromCollectionPage();
 
         if (driver.findElements(By.cssSelector(".add-to-cart")).size() != 0) {
             button = driver.findElement(By.cssSelector(".add-to-cart"));
@@ -49,17 +50,13 @@ public class Deal extends UtilsDeindeal {
             button = driver.findElement(By.cssSelector(".deal-mod-popup"));
         }
 
-
+        button.click();
         //if it is MOD open the modal, make a list of the on-stock variants, pick a random in-stock variant
         if (type.equals("mod")) {
-            I_add_a_deal_from_modal(button);
-            channel.I_am_on_channel_as_an_existing_visitor("any");
-            channel.I_enter_a_random_collection();
 
         }
         //if it is not an MOD we add to the cart until we finish the list of sizes. Then we change the size. Then we change the product
         else {
-            button.click();
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#popup-cart")));
             numberOfElementsInTheCart = driver.findElements(By.cssSelector("tr.item.active")).size();
             int sizesIterator = 0;
