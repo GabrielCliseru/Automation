@@ -15,8 +15,7 @@ public class Channel extends UtilsDeindeal {
     Homepage homepage = PageFactory.initElements(driver, Homepage.class);
 
     @When("^I enter a random collection$")
-    public int I_enter_a_random_collection()
-    {
+    public int I_enter_a_random_collection() {
         List<WebElement> collectionObjects;
         Random rand = new Random();
         int i;
@@ -24,44 +23,53 @@ public class Channel extends UtilsDeindeal {
         WebElement currentElement;
 
         /*There are different page types, with different layouts, here we can find an array of locators and we try each
-        // one of them until we manage to find the one that fits. On else there is an error. It will land there when we
+         one of them until we manage to find the one that fits. On else there is an error. It will land there when we
          introduce a new channel template*/
 
-        String[] collectionsSelector = {"[data-tracking-type='collection']", "#collectionsWrapper li",".productBox"};
-        if (driver.findElements(By.cssSelector(collectionsSelector[0])).size() != 0){
+        String[] collectionsSelector = {"[data-tracking-type='collection']", "#collectionsWrapper li", ".productBox"};
+        if (driver.findElements(By.cssSelector(collectionsSelector[0])).size() != 0) {
             collectionObjects = driver.findElements(By.cssSelector(collectionsSelector[0]));
-        }else if(driver.findElements(By.cssSelector(collectionsSelector[1])).size() != 0){
+        } else if (driver.findElements(By.cssSelector(collectionsSelector[1])).size() != 0) {
             collectionObjects = driver.findElements(By.cssSelector(collectionsSelector[1]));
-        }else if(driver.findElements(By.cssSelector(collectionsSelector[2])).size() != 0){
+        } else if (driver.findElements(By.cssSelector(collectionsSelector[2])).size() != 0) {
             collectionObjects = driver.findElements(By.cssSelector(collectionsSelector[2]));
-        }else {
+        } else {
             Assert.assertTrue("On page " + driver.getCurrentUrl() + " there is no valid selector for I_enter_a_random_collection", 1 != 1);
             collectionObjects = null;
         }
 
+        /*
+        A random collection is picked. If it is part of the carousel the navigation dot is pressed and then the link is clicked.
+        else the linked is clicked directly.
+         */
         do {
             i = rand.nextInt(collectionObjects.size());
             currentElement = collectionObjects.get(i);
             collectionID = currentElement.getAttribute("data-tracking-id");
-            //TODO: put a new condition here for the channels without carousels
-            if (i>=3&&i<=5){
-                if (i==3){
+
+            if (i >= 3 && i <= 5 && driver.findElements(By.cssSelector("#channelCarousel")).size() > 0) {
+                if (i == 3) {
                     driver.findElements(By.cssSelector("#channelCarousel .pagination li")).get(0).click();
-                }if (i==4){
+                }else if (i == 4) {
                     driver.findElements(By.cssSelector("#channelCarousel .pagination li")).get(1).click();
-                }else{
+                } else {
                     driver.findElements(By.cssSelector("#channelCarousel .pagination li")).get(2).click();
                 }
             }
-        }while(!currentElement.isDisplayed()&&currentElement.isEnabled());
+        } while (!currentElement.isDisplayed() && currentElement.isEnabled());
+
+        /*
+        the script waits until the previously clicked element becomes visible and then clicks.
+        At the end it returns the ID of the collection for further use
+         */
         wait.until(ExpectedConditions.visibilityOf(currentElement));
         currentElement.click();
         return Integer.parseInt(collectionID);
     }
 
     @Given("^I am on \"([^\"]*)\" channel as an existing visitor$")
-    public void I_am_on_channel_as_an_existing_visitor(String channelName){
-        if(channelName.equalsIgnoreCase("any")){
+    public void I_am_on_channel_as_an_existing_visitor(String channelName) {
+        if (channelName.equalsIgnoreCase("any")) {
             homepage.I_am_on_the_homepage_as_an_existing_visitor();
             List<WebElement> channels = driver.findElements(By.cssSelector(".channels li"));
             Random rand = new Random();
@@ -74,7 +82,7 @@ public class Channel extends UtilsDeindeal {
                 chosenChannel = channels.get(i);
                 currentChannelName = chosenChannel.getAttribute("data-subdomain");
             }
-            while(currentChannelName.equalsIgnoreCase("love"));
+            while (currentChannelName.equalsIgnoreCase("love"));
 
             setChannelToOpen(currentChannelName);
 
@@ -83,8 +91,8 @@ public class Channel extends UtilsDeindeal {
     }
 
     @Given("^I am on \"([^\"]*)\" channel as an existing visitor on \"([^\"]*)\"$")
-    public void I_am_on_channel_as_an_existing_visitor_on(String channelName, String language){
-        if(channelName.equalsIgnoreCase("any")){
+    public void I_am_on_channel_as_an_existing_visitor_on(String channelName, String language) {
+        if (channelName.equalsIgnoreCase("any")) {
             homepage.I_am_on_the_homepage_as_an_existing_visitor_on(language);
             List<WebElement> channels = driver.findElements(By.cssSelector(".channel-item"));
             Random rand = new Random();
@@ -96,7 +104,7 @@ public class Channel extends UtilsDeindeal {
                 chosenChannel = channels.get(i);
                 currentChannelName = chosenChannel.getAttribute("data-subdomain");
             }
-            while(currentChannelName.equalsIgnoreCase("love"));
+            while (currentChannelName.equalsIgnoreCase("love"));
 
             setChannelToOpen(currentChannelName);
 
