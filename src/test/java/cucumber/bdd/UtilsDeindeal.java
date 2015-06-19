@@ -20,6 +20,7 @@ public class UtilsDeindeal extends SetupDriver {
     //This is used to store the channel to be opened
     private static String channelToOpen;
     public String cityName,cityNameID;
+    String url = "http://www.deindeal.ch";
     public Properties errorMessages = readErrorMessagesFile("errorMessages");
     String newEmailAddress = generateEmailAddress();
     String newPassword = generateString();

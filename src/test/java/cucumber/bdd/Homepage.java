@@ -34,40 +34,31 @@ public class Homepage extends UtilsDeindeal {
     }
 
     @Given("^I am on the homepage on \"([^\"]*)\"$")
-    public String I_am_on_the_homepage_on(String language){
-        String url = I_am_on_the_homepage_a_new_visitor();
+    public void I_am_on_the_homepage_on(String language){
         String finalUrl = url+"/"+language.toLowerCase();
         driver.get(finalUrl);
-        return finalUrl;
     }
 
     @Given("^I am on the homepage as an existing visitor$")
-    public String I_am_on_the_homepage_as_an_existing_visitor(){
-        String url = I_am_on_the_homepage_a_new_visitor();
+    public void I_am_on_the_homepage_as_an_existing_visitor(){
         String finalUrl = url+"/de/?src=newsletter";
         driver.get(finalUrl);
-        return finalUrl;
     }
 
     @Given("^I am on the homepage as a new visitor$")
-    public String I_am_on_the_homepage_a_new_visitor(){
-        String url = "http://www.deindeal.ch";
+    public void I_am_on_the_homepage_a_new_visitor(){
         driver.get(url);
-        return url;
     }
 
     @Given("^I am on the homepage as an existing visitor on \"([^\"]*)\"$")
-    public String I_am_on_the_homepage_as_an_existing_visitor_on(String language){
-        String url = I_am_on_the_homepage_on(language);
-        String finalUrl = url+"/?src=newsletter";
+    public void I_am_on_the_homepage_as_an_existing_visitor_on(String language){
+        String finalUrl = url+"/"+language+"/?src=newsletter";
         driver.get(finalUrl);
-        return  finalUrl;
     }
 
     @Then("^I should land on homepage$")
     public void I_should_land_on_homepage(){
         String currentLink = driver.getCurrentUrl();
-        String homepageLink = "http://www.deindeal.ch/";
-        Assert.assertTrue("Expected to be on homepage, but landed on "+currentLink, currentLink.contains(homepageLink));
+        Assert.assertTrue("Expected to be on homepage, but landed on "+currentLink, currentLink.contains(url));
     }
 }

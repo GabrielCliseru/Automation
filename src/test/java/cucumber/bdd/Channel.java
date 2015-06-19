@@ -8,8 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Channel extends UtilsDeindeal {
     Homepage homepage = PageFactory.initElements(driver, Homepage.class);
@@ -47,14 +46,33 @@ public class Channel extends UtilsDeindeal {
             currentElement = collectionObjects.get(i);
             collectionID = currentElement.getAttribute("data-tracking-id");
 
-            if (i >= 3 && i <= 5 && driver.findElements(By.cssSelector("#channelCarousel")).size() > 0) {
-                if (i == 3) {
-                    driver.findElements(By.cssSelector("#channelCarousel .pagination li")).get(0).click();
-                }else if (i == 4) {
-                    driver.findElements(By.cssSelector("#channelCarousel .pagination li")).get(1).click();
-                } else {
-                    driver.findElements(By.cssSelector("#channelCarousel .pagination li")).get(2).click();
+            /*
+            We have the carousel with elements if the carousel element exists and the elements inside are distinct.
+            If the "data-tracking-id" 's value is the same, the carousel exists without slides. This usually happens on
+            staging where we don't have proper data.
+             */
+
+            ArrayList<String> dataTrackingIds = new ArrayList<String>();
+
+            if(driver.findElements(By.cssSelector("#channelCarousel")).size() > 0){
+                List<WebElement> carouselLiElements = driver.findElements(By.cssSelector("#channelCarousel li"));
+                for (int liIterator = 0;liIterator<carouselLiElements.size()-1;liIterator++){
+                    String trackingId = carouselLiElements.get(liIterator).getAttribute("data-tracking-id");
+                    String classes = carouselLiElements.get(liIterator).getAttribute("class");
+                    //the motherfucking super craptastic carousel contains cloned items. We have to drop them.
+                    if (!dataTrackingIds.contains(trackingId) && !classes.contains("bx-clone")){
+                        dataTrackingIds.add(trackingId);
+                    }
                 }
+            }
+
+            /*
+            If the collection ID picked randomly is included in the list of collections from the carousel we should
+            click on the collection bouble that scrolls it into view
+             */
+            if(dataTrackingIds.contains(collectionID)){
+                //click on the pagination for showing the collection
+                driver.findElements(By.cssSelector("#channelCarousel .pagination li")).get(dataTrackingIds.indexOf(collectionID)).click();
             }
         } while (!currentElement.isDisplayed() && currentElement.isEnabled());
 
