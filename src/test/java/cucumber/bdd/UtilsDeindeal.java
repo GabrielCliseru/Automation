@@ -1,6 +1,5 @@
 package cucumber.bdd;
 
-import com.sun.tools.internal.ws.wsdl.document.jaxws.*;
 import junit.framework.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;

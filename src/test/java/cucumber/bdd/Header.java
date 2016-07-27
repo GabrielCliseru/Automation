@@ -30,7 +30,8 @@ public class Header extends UtilsDeindeal {
     }
 
     @Then("^I should land on \"([^\"]*)\"$")
-    public void I_should_land_on(String incomingString) {
+    public void I_should_land_on(String incomingString) throws InterruptedException {
+        Thread.sleep(1000);
         String URL = driver.getCurrentUrl();
         String URLtoTest = "http://www.deindeal.ch"+incomingString;
         Assert.assertTrue("Landed on " + URL + " instead of " + URLtoTest, URLtoTest.equalsIgnoreCase(URL));

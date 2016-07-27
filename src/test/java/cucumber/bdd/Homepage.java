@@ -54,6 +54,7 @@ public class Homepage extends UtilsDeindeal {
     public void I_am_on_the_homepage_as_an_existing_visitor_on(String language){
         String finalUrl = url+"/"+language+"/?src=newsletter";
         driver.get(finalUrl);
+        driver.findElement(By.linkText(language)).click();
     }
 
     @Then("^I should land on homepage$")

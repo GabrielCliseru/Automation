@@ -16,11 +16,12 @@ Feature: Header
     Given I am on the homepage as an existing visitor on "<language>"
     And language is set to "<language>"
     When I click the header "<refund>" link
+    And I wait for 1 seconds
     Then I should land on "<refundlink>"
     Examples:
       | language | refund                     | refundlink                                   |
-      | DE       | 14 TAGE Rückgaberecht      | /de/wie-funktioniert-deindeal#anchor-lower   |
-      | FR       | DROIT DE RETOUR : 14 JOURS | /fr/comment-fonctionne-deindeal#anchor-lower |
+      | DE       | 30 TAGE RÜCKGABERECHT      | /de/wie-funktioniert-deindeal#anchor-lower   |
+      | FR       | DROIT DE RETOUR : 30 JOURS | /fr/comment-fonctionne-deindeal#anchor-lower |
 
   @readyToRun
   Scenario Outline: Header customer care phone number link validation
